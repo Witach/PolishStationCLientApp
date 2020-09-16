@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "polish-station-app"
+    }
+  },
+  "defaultProject": "polish-station-app",
+  "cli": {
+    "analytics": "be579c16-c3cd-47a8-aa1a-0179bdd507cc"
+  }
 }
