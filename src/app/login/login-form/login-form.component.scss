@@ -1,0 +1,34 @@
+@import "../../../common";
+
+.login-card-container {
+  @include flex-end;
+  @include full-screen;
+  align-items: flex-start;
+
+  @include on-mobile {
+    @include flex-center;
+  }
+  mat-form-field {
+    display: block;
+  }
+
+  .small-card {
+    margin: 20px;
+  }
+
+  ::ng-deep {
+
+    mat-form-field {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .submit-button {
+      margin-top: 20px;
+      @include full-width;
+    }
+
+  }
+
+}
+
