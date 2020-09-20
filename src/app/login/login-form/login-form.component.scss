@@ -1,6 +1,7 @@
 @import "../../../common";
 
 .login-card-container {
+  $button-margin: 20px;
   @include flex-end;
   @include full-screen;
   align-items: flex-start;
@@ -13,21 +14,32 @@
   }
 
   .small-card {
-    margin: 20px;
+    margin: $button-margin;
+    @include col(2, 12);
   }
 
   ::ng-deep {
 
     mat-form-field {
       display: block;
-      margin-bottom: 20px;
+      margin-bottom: $button-margin;
     }
 
     .submit-button {
-      margin-top: 20px;
+      margin-top: $button-margin;
       @include full-width;
     }
 
+  }
+  mat-card.centralized {
+    mat-card-header {
+      @include flex-center;
+    }
+
+    mat-card-content,
+    mat-card-title {
+      text-align: center;
+    }
   }
 
 }

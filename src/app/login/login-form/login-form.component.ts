@@ -10,6 +10,9 @@ export class LoginFormComponent implements OnInit {
   @Input()
   headerText: string;
 
+  @Input()
+  centralizedData = false;
+
   constructor() { }
 
   ngOnInit(): void {

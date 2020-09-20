@@ -12,7 +12,7 @@ app-login-app {
 }
 
 .navbar-buttons-contianer {
-  width: 100%;
+  @include full-width;
   @include flex-end;
   > button {
     margin: 0 5px;

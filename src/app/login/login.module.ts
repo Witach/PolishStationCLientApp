@@ -8,6 +8,7 @@ import {RegisterFormComponent} from './register-form/register-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
 import { ValidFormIconPipe } from './service/form-icon.pipe';
+import { SuccessfulSignUpComponent } from './successful-sign-up/successful-sign-up.component';
 
 
 
@@ -19,7 +20,8 @@ import { ValidFormIconPipe } from './service/form-icon.pipe';
     RegisterFormComponent,
     SignUpFormComponent,
     SignInFormComponent,
-    ValidFormIconPipe
+    ValidFormIconPipe,
+    SuccessfulSignUpComponent
   ],
   imports: [
     SharedModule,

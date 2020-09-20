@@ -9,6 +9,10 @@ $mobile-width: 599px;
   height: 100%;
 }
 
+@mixin centralized {
+  margin: 0 auto;
+}
+
 @mixin fit-content() {
   display: inline-block;
   width: auto;
@@ -18,6 +22,11 @@ $mobile-width: 599px;
 @mixin flex-end() {
   display: flex;
   justify-content: flex-end;
+}
+
+@mixin flex-start() {
+  display: flex;
+  justify-content: flex-start;
 }
 
 @mixin flex-center() {
@@ -37,6 +46,19 @@ $mobile-width: 599px;
 @mixin on-mobile() {
   @media only screen and (max-width: $mobile-width) {
     @content;
+  }
+}
+
+$col-unit: 8.333333%;
+
+@mixin col($number) {
+  width: $number * $col-unit;
+}
+
+@mixin col($number, $mobile-number){
+  width: $number * $col-unit;
+  @include on-mobile {
+    width: $mobile-number * $col-unit;
   }
 }
 
