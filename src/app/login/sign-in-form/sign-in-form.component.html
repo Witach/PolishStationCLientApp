@@ -1,17 +1,17 @@
 <app-login-form headerText="Sign In">
-  <form>
+  <form [formGroup]="loggingUser" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" >
       <mat-label>Email</mat-label>
-      <input matInput/>
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <input matInput formControlName="email"/>
+      <mat-icon matSuffix>{{loggingUser | validFormIcon: 'email' }}</mat-icon>
       <mat-hint>Email should consist domain address like @gmail.com</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput/>
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <input matInput formControlName="password"/>
+      <mat-icon matSuffix>{{loggingUser | validFormIcon: 'password' }}</mat-icon>
       <mat-hint>Password should consist at least one uppercase letter and 8 chars</mat-hint>
     </mat-form-field>
-    <button mat-raised-button color="primary" class="submit-button">Sign in</button>
+    <button mat-raised-button color="primary" class="submit-button" type="submit" [disabled]="!loggingUser.valid">Sign in</button>
   </form>
 </app-login-form>

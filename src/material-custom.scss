@@ -50,6 +50,14 @@ $polish-station-input-theme: mat-light-theme(
   $polish-station-input-theme-warn
 );
 
+$success-color: green;
+
 @include angular-material-theme($polish-station-theme);
 @include mat-input-theme($polish-station-input-theme);
 @include mat-form-field-theme($polish-station-input-theme);
+
+mat-form-field.ng-touched.ng-valid.mat-form-field-appearance-outline  {
+  .mat-form-field-outline, .mat-form-field-label {
+    color: $success-color !important;
+  }
+}

@@ -8,7 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -22,6 +22,7 @@ import {FormsModule} from '@angular/forms';
     CommonModule,
     RouterModule,
     MatCardModule,
+    ReactiveFormsModule,
     FormsModule,
   ],
   exports: [
@@ -35,6 +36,7 @@ import {FormsModule} from '@angular/forms';
     RouterModule,
     MatCardModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class SharedModule { }

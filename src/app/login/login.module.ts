@@ -7,6 +7,7 @@ import {LoginRoutingModule} from './login-routing.module';
 import {RegisterFormComponent} from './register-form/register-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
+import { ValidFormIconPipe } from './service/form-icon.pipe';
 
 
 
@@ -17,7 +18,8 @@ import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
     LoginAppComponent,
     RegisterFormComponent,
     SignUpFormComponent,
-    SignInFormComponent
+    SignInFormComponent,
+    ValidFormIconPipe
   ],
   imports: [
     SharedModule,
