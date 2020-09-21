@@ -1,13 +1,5 @@
 <div class="app-container main-container">
-  <mat-toolbar class="red-gradient">
-    <span class="pacifico brand-logo">PolishStation</span>
-    <span class="example-spacer"></span>
-    <fa-icon [icon]="gasPump" class="brand-logo-icon"></fa-icon>
-    <div class="navbar-buttons-contianer">
-      <button mat-flat-button i18n>Sign In</button>
-      <button mat-flat-button color="primary" i18n>Sign Up</button>
-    </div>
-  </mat-toolbar>
+  <app-login-navbar class="navbar"></app-login-navbar>
   <div class="app-container img-container">
     <router-outlet></router-outlet>
   </div>

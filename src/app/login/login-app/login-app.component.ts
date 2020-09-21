@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {faGasPump} from '@fortawesome/free-solid-svg-icons';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-login-app',
@@ -7,9 +6,6 @@ import {faGasPump} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./login-app.component.scss']
 })
 export class LoginAppComponent implements OnInit {
-
-  gasPump = faGasPump;
-
   constructor() { }
 
   ngOnInit(): void {

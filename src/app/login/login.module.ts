@@ -9,6 +9,8 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
 import { ValidFormIconPipe } from './service/form-icon.pipe';
 import { SuccessfulSignUpComponent } from './successful-sign-up/successful-sign-up.component';
+import {WidgetsModule} from "../widget/widgets.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 
@@ -26,6 +28,8 @@ import { SuccessfulSignUpComponent } from './successful-sign-up/successful-sign-
   imports: [
     SharedModule,
     LoginRoutingModule,
+    WidgetsModule,
+    MatSidenavModule,
   ]
 })
 export class LoginModule { }
