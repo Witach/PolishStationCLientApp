@@ -52,7 +52,7 @@ $mobile-width: 599px;
 
 $col-unit: 8.333333%;
 
-@mixin col($number) {
+@mixin col-desktop($number) {
   width: $number * $col-unit;
 }
 
@@ -115,7 +115,14 @@ mat-toolbar {
   @include default-box-shadow;
 }
 
-
+.container-content-fluid {
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 20px 0;
+  @include centralized;
+  @include col-desktop(12);
+}
 
 .navbar-buttons-contianer {
   @include full-width;

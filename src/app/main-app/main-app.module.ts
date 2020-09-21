@@ -6,11 +6,13 @@ import {MainAppRoutingModule} from './main-app-routing.module';
 import {WidgetsModule} from '../widget/widgets.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FilterComponent } from './filter/filter.component';
+import { StationListComponent } from './station-list/station-list.component';
 
 
 
 @NgModule({
-  declarations: [MainAppComponent, DashboardComponent],
+  declarations: [MainAppComponent, DashboardComponent, FilterComponent, StationListComponent],
   imports: [
     MainAppRoutingModule,
     CommonModule,
