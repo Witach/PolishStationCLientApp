@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {PetrolStationDto} from "../../../api-models/api-models";
-import {petrolStations} from "../../../stub/petrols-stations";
+import {Component, Input, OnInit} from '@angular/core';
+import {PetrolStationDto} from '../../../api-models/api-models';
 
 @Component({
   selector: 'app-station-item',
@@ -9,12 +8,12 @@ import {petrolStations} from "../../../stub/petrols-stations";
 })
 export class StationItemComponent implements OnInit {
 
+  @Input()
   item: PetrolStationDto;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.item = petrolStations[0];
   }
 
 }

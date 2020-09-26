@@ -135,6 +135,13 @@ $light-theme-color: map-get($polish-station-theme-primary, 50);
   @include full-width;
 }
 
+@mixin on-mobile-prop($prop-name, $prop-desktop, $prop-mobile) {
+  #{$prop-name}: $prop-desktop;
+  @include on-mobile {
+    #{$prop-name}: $prop-mobile;
+  }
+}
+
 mat-toolbar {
   @include default-box-shadow;
 }

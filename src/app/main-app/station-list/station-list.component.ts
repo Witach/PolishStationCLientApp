@@ -14,7 +14,7 @@ export class StationListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.list = petrolStations;
+    this.list = petrolStations.concat(petrolStations).concat(petrolStations);
   }
 
 }

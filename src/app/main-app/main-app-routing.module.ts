@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainAppComponent} from './main-app/main-app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {StationListComponent} from "./station-list/station-list.component";
-import {StationItemComponent} from "./station-item/station-item.component";
+import {StationListComponent} from './station-list/station-list.component';
+import {StationItemComponent} from './station-item/station-item.component';
 
 const routes: Routes = [
   { path: 'main', component: MainAppComponent,
