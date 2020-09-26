@@ -1,0 +1,29 @@
+@import "../../../common";
+
+.mat-card.small-card {
+  flex-grow: 0;
+  margin: 10px;
+  padding: 10px;
+  display: block;
+}
+
+.card-info-container {
+  display: flex;
+  margin-bottom: 10px;
+  app-fuel-prices {
+    flex-grow: 1;
+  }
+}
+
+.side-info {
+  @include small-text;
+  margin: 0;
+}
+h2 {
+  @include header-text;
+  margin: 0;
+  flex-grow: 1;
+  @include on-mobile {
+    flex-grow: 0;
+  }
+}

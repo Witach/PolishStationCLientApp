@@ -1,19 +1,19 @@
-interface PetrolStationDto {
+export interface PetrolStationDto {
   id: number;
   dkn: number;
-  fuelTypes: string[];
   localization: LocalizationDto;
   name: string;
   petrolStationStats: PetrolStationStats;
+  fuelPriceDTO: LastFuelPriceDTO[];
 }
 
-interface PetrolStationStats {
+export interface PetrolStationStats {
   amountOfOpinion: number;
   avgOpinion: number;
   avgPrice: number;
 }
 
-interface LocalizationDto {
+export interface LocalizationDto {
   lat: string;
   long: string;
   name: string;
@@ -23,7 +23,7 @@ interface LocalizationDto {
   street: string;
 }
 
-interface AppUserDTO {
+export interface AppUserDTO {
   appUserRoles: string[];
   email: string;
   id: number;
@@ -31,16 +31,16 @@ interface AppUserDTO {
   username: string;
 }
 
-interface AppUserRoleDto {
+export interface AppUserRoleDto {
   name: string;
 }
 
-interface AuthRequest {
+export interface AuthRequest {
   password: string;
   username: string;
 }
 
-interface PetrolStationForPetrolPrice {
+export interface PetrolStationForPetrolPrice {
   dkn: number;
   fuelTypes: string[];
   id: number;
@@ -48,7 +48,7 @@ interface PetrolStationForPetrolPrice {
   petrolStationStats: PetrolStationStats;
 }
 
-interface FuelPriceDto {
+export interface FuelPriceDto {
   appUserDTO: AppUserDTO;
   fuelType: string;
   id: number;
@@ -57,11 +57,11 @@ interface FuelPriceDto {
   price: number;
 }
 
-interface FuelTypeDto {
+export interface FuelTypeDto {
   name: string;
 }
 
-interface OpinionDto {
+export interface OpinionDto {
   date: string;
   id: number;
   mark: number;
@@ -69,13 +69,13 @@ interface OpinionDto {
   userId: number;
 }
 
-interface AppUserPostDto {
+export interface AppUserPostDto {
   email: string;
   password: string;
   username: string;
 }
 
-interface FuelPricePostDto {
+export interface FuelPricePostDto {
   appUserId: number;
   date: string;
   fuelType: string;
@@ -83,7 +83,7 @@ interface FuelPricePostDto {
   price: number;
 }
 
-interface LocalizationPostDto {
+export interface LocalizationPostDto {
   name: string;
   number: string;
   postalCode: string;
@@ -91,15 +91,22 @@ interface LocalizationPostDto {
   street: string;
 }
 
-interface OpinionPostDto {
+export interface OpinionPostDto {
   mark: number;
   petrolStationId: number;
   userId: number;
 }
 
-interface PetrolStationPostDto {
+export interface PetrolStationPostDto {
   dkn: number;
   fuelTypes: string[];
   localization: LocalizationPostDto;
   name: string;
+}
+
+export interface LastFuelPriceDTO {
+  id: number;
+  price: number;
+  fuelType: string;
+  date: string;
 }

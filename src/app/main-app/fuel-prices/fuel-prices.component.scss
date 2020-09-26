@@ -1,0 +1,22 @@
+@import "../../../common";
+
+mat-chip[color="primary"].prices-container {
+  @include flex-list(auto);
+  @include full-width;
+  @include circular;
+  margin-left: 5px;
+  justify-content: space-between;
+  background: map-get($polish-station-input-theme-primary, 600);
+  color: map-get(map-get($polish-station-input-theme-primary, contrast), 600);
+}
+
+.price-item {
+  text-align: center;
+  margin: 0 5px;
+
+  > span {
+    font-size: .8rem;
+    margin: auto;
+    display: block;
+  }
+}
