@@ -110,3 +110,6 @@ export interface LastFuelPriceDTO {
   fuelType: string;
   date: string;
 }
+export interface AUthResponse {
+  jwt: string;
+}

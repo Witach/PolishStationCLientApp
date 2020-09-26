@@ -1,4 +1,11 @@
-<mat-sidenav-content>
-  sdfsdfsdfsdfsd
-</mat-sidenav-content>
-
+<mat-selection-list [multiple]="false">
+  <mat-list-option color="primary"
+                   *ngFor="let item of menuItems"
+                   [value]="item.href"
+                   (click)="onMenuItemClick(item.href, item.procedure)">
+    <span class="menu-item" [routerLink]="item.href">
+      <mat-icon>{{item.iconName}}</mat-icon>
+      <span>{{item.title}}</span>
+    </span>
+  </mat-list-option>
+</mat-selection-list>

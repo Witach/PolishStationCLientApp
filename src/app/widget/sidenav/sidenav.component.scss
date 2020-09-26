@@ -1,0 +1,14 @@
+@import "../../../common";
+
+.mat-list-base {
+  padding-top: 0;
+}
+.menu-item {
+  @include flex-start;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-list-option[color="primary"] .menu-item {
+  color: map-get($polish-station-theme-primary, 600);
+}

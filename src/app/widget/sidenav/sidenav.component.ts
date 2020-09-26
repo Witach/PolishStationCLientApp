@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material/sidenav';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidenav',
@@ -8,16 +8,26 @@ import {MatSidenav} from '@angular/material/sidenav';
 })
 export class SidenavComponent implements OnInit {
 
-  @ViewChild('sidenav')
-  sidenav: MatSidenav;
+  menuItems: MenuItem[] = [
+    {title: 'Szukaj stacji', iconName: 'search', href: ['/main']},
+    {title: 'Ustawienia', iconName: 'settings', href: ['/settings']},
+    {title: 'Wylogój się', iconName: 'exit_to_app', href: ['/logout']},
+  ];
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  onMenuItemClick(path: string[], procedure: () => void ) {
+    procedure();
+    this.router.navigate(path);
+  }
 
   ngOnInit(): void {
   }
+}
 
-  toggleSideNav() {
-    this.sidenav.toggle(true);
-  }
-
+interface MenuItem {
+  title: string;
+  iconName: string;
+  href: string[];
+  procedure?: () => void;
 }
