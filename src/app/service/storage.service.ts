@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AppUserDTO} from "../../api-models/api-models";
+import {AppUserDTO} from '../../api-models/api-models';
 
 @Injectable({
   providedIn: 'root'

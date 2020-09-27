@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {AppUserDTO, AUthResponse} from '../../api-models/api-models';
+import {AppUserDTO, AppUserPostDto, AUthResponse} from '../../api-models/api-models';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {StorageService} from './storage.service';
 
 @Injectable({
@@ -23,9 +23,16 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  register(newUser: AppUserPostDto): Observable<AppUserDTO> {
+    return this.http.post<AppUserDTO>(`${environment.apiUrl}/register`, newUser).pipe(
+      first());
+  }
+
   login(username: string, password: string) {
-    return this.http.post<AppUserDTO>(`${environment.apiUrl}/users/authenticate`, null)
-      .pipe(map(user => {
+    return this.http.post<AppUserDTO>(`${environment.apiUrl}/auth`, {username, password})
+      .pipe(
+        first(),
+        map(user => {
         this.storageService.saveUserInStorage(user);
         this.currentUserSubject.next(user);
         return user;
