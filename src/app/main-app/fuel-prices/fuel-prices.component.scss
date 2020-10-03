@@ -6,7 +6,7 @@ mat-chip[color="primary"].prices-container {
   @include circular;
   margin-left: 5px;
   justify-content: space-between;
-  background: map-get($polish-station-input-theme-primary, 600);
+  background: linear-gradient(0.25turn, map-get($polish-station-input-theme-primary, 800), map-get($polish-station-input-theme-primary, 300));
   color: map-get(map-get($polish-station-input-theme-primary, contrast), 600);
 }
 

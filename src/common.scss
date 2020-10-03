@@ -3,6 +3,7 @@
 @import 'material-custom';
 
 $mobile-width: 599px;
+$disable-color: rgba(0, 0, 0, 0.12);
 
 @mixin full-screen{
   width: 100%;
@@ -100,8 +101,10 @@ $white-color: $light-primary-text;
 $dark-theme-color: map-get($polish-station-theme-primary, A700);
 $light-theme-color: map-get($polish-station-theme-primary, 50);
 
+$linear-gradient: linear-gradient(0.25turn, $dark-theme-color, $light-theme-color);
+
 .theme-gradient {
-  background: linear-gradient(0.25turn, $dark-theme-color, $light-theme-color);
+  background: $linear-gradient;
 }
 
 .mat-card.small-card {
@@ -161,5 +164,10 @@ mat-toolbar {
   > button {
     margin: 0 5px;
   }
+}
+
+.polish-station-snack-bar {
+  background: $linear-gradient;
+  color: $light-theme-color;
 }
 

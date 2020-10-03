@@ -1,7 +1,7 @@
 <mat-toolbar class="theme-gradient">
   <app-brand-logo></app-brand-logo>
   <div class="navbar-buttons-contianer">
-    <button mat-flat-button i18n>Sign In</button>
-    <button mat-flat-button color="primary" i18n>Sign Up</button>
+    <button mat-flat-button i18n [routerLink]="['login']">Sign In</button>
+    <button mat-flat-button color="primary" [routerLink]="['register']" i18n>Sign Up</button>
   </div>
 </mat-toolbar>

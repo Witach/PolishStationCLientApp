@@ -28,6 +28,10 @@
     .submit-button {
       margin-top: $button-margin;
       @include full-width;
+      background: $linear-gradient;
+    }
+    .mat-raised-button.mat-primary[disabled] {
+      background: $disable-color;
     }
 
   }

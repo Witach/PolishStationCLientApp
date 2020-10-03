@@ -23,8 +23,13 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  updateUserData(userData: AppUserDTO) {
+    this.currentUserSubject.next(userData);
+    this.storageService.saveUserInStorage(userData);
+  }
+
   register(newUser: AppUserPostDto): Observable<AppUserDTO> {
-    return this.http.post<AppUserDTO>(`${environment.apiUrl}/register`, newUser).pipe(
+    return this.http.post<AppUserDTO>(`${environment.apiUrl}/app-user/register`, newUser).pipe(
       first());
   }
 

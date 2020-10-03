@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {fieldsDefs} from '../../fields-definitions/fields-definitions';
 import {AuthService} from '../../service/auth.service';
-import {noop} from 'rxjs';
 import {Router} from '@angular/router';
+import {SnackBarService} from '../../widget/snack-bar.service';
+import {first, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -14,7 +15,10 @@ export class SignInFormComponent implements OnInit {
 
   loggingUser: FormGroup;
 
-  constructor(private formsBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private formsBuilder: FormBuilder,
+              private authService: AuthService,
+              private router: Router,
+              private snackBar: SnackBarService) {
   }
 
   ngOnInit(): void {
@@ -28,9 +32,13 @@ export class SignInFormComponent implements OnInit {
   onSubmit() {
     if (this.loggingUser.valid) {
       this.authService.login(this.loggingUser.get('email').value, this.loggingUser.get('password').value)
+        .pipe(
+          first(),
+          tap(user => this.authService.updateUserData(user))
+        )
         .subscribe(
           () => this.router.navigate(['/main', 'dashboard']),
-          noop
+          err => this.snackBar.openSnackBar(err)
         );
     }
   }

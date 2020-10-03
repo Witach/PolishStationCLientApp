@@ -5,12 +5,14 @@ import {SharedModule} from '../common/shared.module';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from "@angular/material/list";
+import {MatListModule} from '@angular/material/list';
+import {SnackBarService} from './snack-bar.service';
 
 
 
 @NgModule({
   declarations: [BrandLogoComponent, LoginNavbarComponent, NavbarComponent, SidenavComponent],
+  providers: [SnackBarService],
   exports: [BrandLogoComponent, LoginNavbarComponent, NavbarComponent, SidenavComponent],
     imports: [
         SharedModule,

@@ -9,10 +9,13 @@ import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
   imports: [
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
@@ -24,8 +27,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCardModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSnackBarModule,
   ],
   exports: [
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
@@ -37,6 +42,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule { }

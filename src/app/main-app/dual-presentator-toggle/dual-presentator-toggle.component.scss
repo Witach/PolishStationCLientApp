@@ -1,0 +1,39 @@
+@import '../../../common';
+
+.material-icons {
+  font-size: 30px;
+}
+.mat-icon {
+  height: 33px;
+  width: 35px;
+}
+mat-button-toggle-group {
+  @include circular;
+  background: $white-color;
+  padding: 5px;
+}
+
+.mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle,
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  border: none;
+}
+
+
+  ::ng-deep {
+    .mat-button-toggle-label-content {
+      line-height: 35px !important;
+      padding: 0 8px !important;
+    }
+  }
+
+mat-button-toggle {
+  @include circular;
+}
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard {
+  background: linear-gradient(0.25turn, map-get($polish-station-input-theme-primary, 800), map-get($polish-station-input-theme-primary, 300));
+  color: $white-color;
+}
+
+.mat-button-toggle .mat-button-toggle-ripple {
+  @include circular;
+}

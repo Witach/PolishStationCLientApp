@@ -1,13 +1,9 @@
 import {NgModule} from '@angular/core';
-import {AuthGuard} from './auth.guard';
-import {AuthService} from './auth.service';
-import {StorageService} from './storage.service';
+import {SharedModule} from "../common/shared.module";
 
 @NgModule({
-  providers: [
-    AuthGuard,
-    AuthService,
-    StorageService
+  imports: [
+    SharedModule,
   ],
   bootstrap: []
 })

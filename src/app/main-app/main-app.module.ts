@@ -13,6 +13,10 @@ import { StationItemComponent } from './station-item/station-item.component';
 import { FuelPricesComponent } from './fuel-prices/fuel-prices.component';
 import { PriceFormatterPipe } from './pipes/price-formatter.pipe';
 import {MatChipsModule} from "@angular/material/chips";
+import { MapListPresentatorComponent } from './map-list-presentator/map-list-presentator.component';
+import { DualPresentatorComponent } from './dual-presentator/dual-presentator.component';
+import { DualPresentatorToggleComponent } from './dual-presentator-toggle/dual-presentator-toggle.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 
 
@@ -23,7 +27,10 @@ import {MatChipsModule} from "@angular/material/chips";
     StationListComponent,
     StationItemComponent,
     FuelPricesComponent,
-    PriceFormatterPipe
+    PriceFormatterPipe,
+    MapListPresentatorComponent,
+    DualPresentatorComponent,
+    DualPresentatorToggleComponent
   ],
   imports: [
     MainAppRoutingModule,
@@ -33,6 +40,7 @@ import {MatChipsModule} from "@angular/material/chips";
     MatSidenavModule,
     MatListModule,
     MatChipsModule,
+    MatButtonToggleModule,
   ]
 })
 export class MainAppModule { }

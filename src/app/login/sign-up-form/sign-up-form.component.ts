@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ValidationErrors, ValidatorFn} from '@angular/fo
 import {fieldsDefs} from '../../fields-definitions/fields-definitions';
 import {AuthService} from '../../service/auth.service';
 import {Router} from '@angular/router';
-import {noop} from 'rxjs';
+import {SnackBarService} from '../../widget/snack-bar.service';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -14,7 +14,7 @@ export class SignUpFormComponent implements OnInit {
 
   registringUser: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
     const {email, username, password, password: repeatPassword} = fieldsDefs;
@@ -33,8 +33,8 @@ export class SignUpFormComponent implements OnInit {
       const password = this.registringUser.get('password').value;
       const username = this.registringUser.get('username').value;
       this.authService.register({email, password, username}).subscribe(
-        () => this.router.navigate(['/main', '/sign-in']),
-        noop
+        () => this.router.navigate(['/auth', 'successful-registration']),
+        err => this.snackBar.openSnackBar(err)
       );
     }
   }

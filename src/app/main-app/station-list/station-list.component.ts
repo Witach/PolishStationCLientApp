@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {petrolStations} from "../../../stub/petrols-stations";
-import {PetrolStationDto, PetrolStationStats} from "../../../api-models/api-models";
+import {Component, Input, OnInit} from '@angular/core';
+import {petrolStations} from '../../../stub/petrols-stations';
+import {PetrolStationDto} from '../../../api-models/api-models';
 
 @Component({
   selector: 'app-station-list',
@@ -9,12 +9,13 @@ import {PetrolStationDto, PetrolStationStats} from "../../../api-models/api-mode
 })
 export class StationListComponent implements OnInit {
 
-  list: PetrolStationDto[];
+  @Input()
+  items: PetrolStationDto[];
 
   constructor() { }
 
   ngOnInit(): void {
-    this.list = petrolStations.concat(petrolStations).concat(petrolStations);
+    this.items = petrolStations.concat(petrolStations).concat(petrolStations);
   }
 
 }

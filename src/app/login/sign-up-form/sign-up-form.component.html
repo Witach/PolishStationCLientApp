@@ -1,5 +1,5 @@
 <app-login-form headerText="Sign Up">
-  <form [formGroup]="registringUser">
+  <form [formGroup]="registringUser" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email"/>
@@ -22,6 +22,6 @@
       <input matInput formControlName="repeatPassword"/>
       <mat-icon matSuffix>{{registringUser | validFormIcon: 'repeatPassword' }}</mat-icon>
     </mat-form-field>
-    <button mat-raised-button color="primary" class="submit-button" [disabled]="!registringUser.valid">Sign in</button>
+    <button mat-raised-button color="primary" class="submit-button" [disabled]="!registringUser.valid" type="submit">Sign in</button>
   </form>
 </app-login-form>
