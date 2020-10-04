@@ -17,6 +17,8 @@ import { MapListPresentatorComponent } from './map-list-presentator/map-list-pre
 import { DualPresentatorComponent } from './dual-presentator/dual-presentator.component';
 import { DualPresentatorToggleComponent } from './dual-presentator-toggle/dual-presentator-toggle.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {DualToggleEventService} from "./dual-presentator-toggle/dual-toggle-event-service";
 
 
 
@@ -32,15 +34,19 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     DualPresentatorComponent,
     DualPresentatorToggleComponent
   ],
-  imports: [
-    MainAppRoutingModule,
-    CommonModule,
-    SharedModule,
-    WidgetsModule,
-    MatSidenavModule,
-    MatListModule,
-    MatChipsModule,
-    MatButtonToggleModule,
-  ]
+  providers: [
+    DualToggleEventService
+  ],
+    imports: [
+        MainAppRoutingModule,
+        CommonModule,
+        SharedModule,
+        WidgetsModule,
+        MatSidenavModule,
+        MatListModule,
+        MatChipsModule,
+        MatButtonToggleModule,
+        ScrollingModule,
+    ]
 })
 export class MainAppModule { }

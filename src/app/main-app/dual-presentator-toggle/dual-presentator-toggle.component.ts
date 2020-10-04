@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {DualToggleEventService} from "./dual-toggle-event-service";
 
 @Component({
   selector: 'app-dual-presentator-toggle',
@@ -7,17 +8,14 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class DualPresentatorToggleComponent implements OnInit {
 
-  @Output()
-  toggleChange = new EventEmitter<string>();
-
-  constructor() {
+  constructor(private dualToggleService: DualToggleEventService) {
   }
 
   ngOnInit(): void {
   }
 
   onButtonToggle(name: string) {
-    this.toggleChange.emit(name);
+    this.dualToggleService.toggleEvent.next(name);
   }
 
 }

@@ -1,8 +1,22 @@
 @import "../../../common";
 
-.fixed-toogle-button {
-  position: fixed;
-  right: 25px;
-  top: 75px;
-  z-index: 2;
+
+
+.swipe-container {
+  overflow: visible;
+  @include flex-list(50%);
+  @include full-screen;
+  @include on-mobile {
+    justify-content: flex-start;
+    > * {
+      flex: 1 0 100%;
+      @include full-screen;
+    }
+  }
+  transition: margin ease-in-out .5s;
+}
+
+.swipe-container-window {
+ overflow: hidden;
+  @include full-screen;
 }

@@ -1,9 +1,10 @@
-<div class="swipe-container">
-  <div class="item-swipe">
-    <app-map-list-presentator></app-map-list-presentator>
-  </div> b
-  <div class="item-swipe">
-    <app-station-list></app-station-list>
+<div class="swipe-container-window">
+  <div class="swipe-container" [ngStyle]="duelPresenterStyle">
+    <div class="item-swipe" id="list-item">
+      <app-station-list></app-station-list>
+    </div>
+    <div class="item-swipe" id="map-item">
+      <app-map-list-presentator></app-map-list-presentator>
+    </div>
   </div>
 </div>
-<app-dual-presentator-toggle (toggleChange)="onTogglePresenterState($event)" class="fixed-toogle-button"></app-dual-presentator-toggle>

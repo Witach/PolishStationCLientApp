@@ -1,4 +1,5 @@
-<div class="list-container">
-    <app-station-item *ngFor="let item of items" [item]="item"></app-station-item>
-</div>
+<cdk-virtual-scroll-viewport class="list-container" [itemSize]="items.length">
+  <app-station-item *cdkVirtualFor="let item of items" [item]="item"></app-station-item>
+</cdk-virtual-scroll-viewport>
+
 

@@ -171,3 +171,7 @@ mat-toolbar {
   color: $light-theme-color;
 }
 
+.hide-on-desktop {
+  @include on-mobile-prop(display, none, block);
+}
+
