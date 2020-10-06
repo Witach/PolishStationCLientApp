@@ -8,6 +8,8 @@ import {LoginModule} from './login/login.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {JwtInterceptorInterceptor} from './service/jwt-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {AppRoutingModule} from './app-routing.module';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

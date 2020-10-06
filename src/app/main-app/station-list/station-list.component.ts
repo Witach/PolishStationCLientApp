@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {petrolStations} from '../../../stub/petrols-stations';
 import {PetrolStationDto} from '../../../api-models/api-models';
 
 @Component({
@@ -15,7 +14,6 @@ export class StationListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.items = petrolStations.concat(petrolStations).concat(petrolStations);
   }
 
 }

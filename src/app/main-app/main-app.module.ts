@@ -19,6 +19,8 @@ import { DualPresentatorToggleComponent } from './dual-presentator-toggle/dual-p
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {DualToggleEventService} from "./dual-presentator-toggle/dual-toggle-event-service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {JwtInterceptorInterceptor} from "../service/jwt-interceptor.interceptor";
 
 
 
@@ -35,7 +37,8 @@ import {DualToggleEventService} from "./dual-presentator-toggle/dual-toggle-even
     DualPresentatorToggleComponent
   ],
   providers: [
-    DualToggleEventService
+    DualToggleEventService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true }
   ],
     imports: [
         MainAppRoutingModule,

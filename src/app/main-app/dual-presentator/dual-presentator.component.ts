@@ -2,6 +2,9 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {MatDrawer} from '@angular/material/sidenav';
 import {DualToggleEventService} from "../dual-presentator-toggle/dual-toggle-event-service";
 import {Subscription} from "rxjs";
+import {PetrolStationService} from "../../service/petrol-station.service";
+import {PetrolStationDto} from "../../../api-models/api-models";
+import {petrolStations} from "../../../stub/petrols-stations";
 
 @Component({
   selector: 'app-dual-presentator',
@@ -19,15 +22,21 @@ export class DualPresentatorComponent implements OnInit, OnDestroy {
     marginLeft: '0'
   };
 
+  items: PetrolStationDto[];
+
   eventSub: Subscription;
 
-  constructor(private dualToggleEvnetService: DualToggleEventService) {
+  constructor(private dualToggleEvnetService: DualToggleEventService, private petrolStationService: PetrolStationService) {
   }
 
   ngOnInit(): void {
     this.eventSub = this.dualToggleEvnetService.toggleEvent$.subscribe(
       (stateName) => this.onTogglePresenterState(stateName)
     );
+    this.petrolStationService.getPetrolStations().subscribe(
+      (stations) => this.items = stations
+    );
+    // this.items = petrolStations.concat(petrolStations).concat(petrolStations);
   }
 
   ngOnDestroy(): void {
