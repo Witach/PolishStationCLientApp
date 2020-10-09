@@ -8,7 +8,6 @@ import {PetrolStationDto} from '../../../api-models/api-models';
 })
 export class MapListPresentatorComponent implements OnInit {
 
-
   @Input()
   items: PetrolStationDto[];
 

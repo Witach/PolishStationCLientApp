@@ -21,6 +21,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import {DualToggleEventService} from "./dual-presentator-toggle/dual-toggle-event-service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {JwtInterceptorInterceptor} from "../service/jwt-interceptor.interceptor";
+import {AgmCoreModule} from "@agm/core";
 
 
 
@@ -50,6 +51,9 @@ import {JwtInterceptorInterceptor} from "../service/jwt-interceptor.interceptor"
         MatChipsModule,
         MatButtonToggleModule,
         ScrollingModule,
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyBhzAitclN7qmw36iBq7a6KiboI_dVHrdg'
+        }),
     ]
 })
 export class MainAppModule { }

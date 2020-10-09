@@ -113,3 +113,7 @@ export interface LastFuelPriceDTO {
 export interface AUthResponse {
   jwt: string;
 }
+
+export interface Page<T> {
+  content: T[];
+}

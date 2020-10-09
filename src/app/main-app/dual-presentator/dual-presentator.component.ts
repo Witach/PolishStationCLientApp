@@ -34,9 +34,8 @@ export class DualPresentatorComponent implements OnInit, OnDestroy {
       (stateName) => this.onTogglePresenterState(stateName)
     );
     this.petrolStationService.getPetrolStations().subscribe(
-      (stations) => this.items = stations
+      (stations) => this.items = stations.content
     );
-    // this.items = petrolStations.concat(petrolStations).concat(petrolStations);
   }
 
   ngOnDestroy(): void {
