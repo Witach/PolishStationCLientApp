@@ -15,6 +15,7 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^3.0.0-beta.0",
+    "@agm/snazzy-info-window": "^3.0.0-beta.0",
     "@angular/animations": "~9.1.1",
     "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.1",
@@ -30,6 +31,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "rxjs": "~6.5.4",
+    "snazzy-info-window": "^1.1.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
@@ -38,7 +40,7 @@
     "@angular/cli": "^9.1.12",
     "@angular/compiler-cli": "~9.1.1",
     "@angular/language-service": "~9.1.1",
-    "@types/googlemaps": "^3.39.12",
+    "@types/googlemaps": "^3.40.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
