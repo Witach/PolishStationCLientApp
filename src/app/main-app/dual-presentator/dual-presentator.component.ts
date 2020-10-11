@@ -34,7 +34,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   constructor(private dualToggleEvnetService: DualToggleEventService,
               private petrolStationService: PetrolStationService,
               private breakpointObserver: BreakpointObserver) {
-    this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Medium]).subscribe(
+    this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Medium, Breakpoints.XSmall]).subscribe(
       res => this.onResolutionChange(res)
     );
   }
@@ -62,9 +62,9 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   onTogglePresenterState(stateName: string) {
-    if (stateName === 'list' && this.isBigScreened) {
+    if (stateName === 'list' && !this.isBigScreened) {
       this.duelPresenterStyle.marginLeft = '0';
-    } else if (stateName === 'map' && this.isBigScreened) {
+    } else if (stateName === 'map' && !this.isBigScreened) {
       this.duelPresenterStyle.marginLeft = '-100%';
     }
   }

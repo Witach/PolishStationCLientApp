@@ -2,6 +2,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {PetrolStationDto} from '../../../api-models/api-models';
 import {MarkerWindowInfoPair, markerWindowPair} from "./petrol-station-info-widget/petrol-station-info-widget";
+import {BehaviorSubject, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-map-list-presentator',
@@ -11,12 +12,14 @@ import {MarkerWindowInfoPair, markerWindowPair} from "./petrol-station-info-widg
 export class MapListPresentatorComponent implements OnInit, AfterViewInit {
 
   petrolStationsProp: PetrolStationDto[] = [];
+  isInitialized = new BehaviorSubject<boolean>(false);
 
   @ViewChild('gmap')
   map: ElementRef;
   gmap: google.maps.Map;
 
   markerPairs: MarkerWindowInfoPair[];
+  petrolStationsSub: Subscription;
 
   @Input()
   set focusedPair(petrolStationId: number | undefined) {
@@ -36,18 +39,27 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
   @Input('items')
   set petrolStations(petrolStations: PetrolStationDto[]) {
     this.petrolStationsProp = petrolStations;
-    this.markerPairs = this.petrolStationsProp.map(
-      petrolStation => markerWindowPair(petrolStation, this.gmap)
-    );
-    this.markerPairs.forEach(pair => pair.marker.addListener('click', () => this.toggleBounce(pair)));
+    this.petrolStationsSub = this.isInitialized.subscribe(isInitial => {
+      if (isInitial) {
+        this.markerPairs = this.petrolStationsProp.map(
+          petrolStation => markerWindowPair(petrolStation, this.gmap)
+        );
+        this.markerPairs.forEach(pair => pair.marker.addListener('click', () => this.toggleBounce(pair)));
+        this.petrolStationsSub.unsubscribe();
+      }
+    });
   }
+
 
   ngOnInit() {
   }
 
   ngAfterViewInit(): void {
     console.log(this.petrolStationsProp);
-    this.gmap = this.googleMapInstance(0, 0);
+    navigator.geolocation.getCurrentPosition( position => {
+      this.gmap = this.googleMapInstance(position.coords.latitude, position.coords.longitude);
+      this.isInitialized.next(true);
+    });
   }
 
   googleMapInstance(lat: number, long: number): google.maps.Map {
