@@ -21,6 +21,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {DualToggleEventService} from './dual-presentator-toggle/dual-toggle-event-service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptorInterceptor} from '../service/jwt-interceptor.interceptor';
+import {LayoutService} from '../service/layout.service';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {JwtInterceptorInterceptor} from '../service/jwt-interceptor.interceptor'
   ],
   providers: [
     DualToggleEventService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
+    LayoutService,
   ],
   imports: [
     MainAppRoutingModule,

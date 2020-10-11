@@ -1,4 +1,5 @@
 import {PetrolStationDto} from '../../../../api-models/api-models';
+import {environment} from "../../../../environments/environment";
 
 export class PetrolStationMarker {
   long: number;
@@ -19,7 +20,7 @@ export class PetrolStationMarker {
       map,
       draggable: false,
       animation: google.maps.Animation.DROP,
-      icon: '/assets/img/petrol-station-marker.ts.png'
+      icon: environment.markerUrl
     });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PetrolStationDto} from '../../../api-models/api-models';
 
 @Component({
@@ -11,9 +11,16 @@ export class StationListComponent implements OnInit {
   @Input()
   items: PetrolStationDto[];
 
+  @Output()
+  listItemClickedEvent = new EventEmitter<PetrolStationDto>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onListItemClick(petrolStation: PetrolStationDto) {
+    this.listItemClickedEvent.emit(petrolStation);
   }
 
 }

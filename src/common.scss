@@ -175,3 +175,38 @@ mat-toolbar {
   @include on-mobile-prop(display, none, block);
 }
 
+
+.gm-style {
+  .gm-style-iw-c {
+    background: linear-gradient(0.25turn, map-get($polish-station-input-theme-primary, 800), map-get($polish-station-input-theme-primary, 300));;
+    overflow: hidden;
+  }
+
+  .gm-style-iw-d {
+    overflow: hidden !important;
+    padding-bottom: 8px;
+    padding-right: 12px;
+  }
+
+  .gm-style-iw-t::after {
+    background: map-get($polish-station-theme-primary, 700);
+  }
+}
+
+//<div class="map-window-info">
+//<span class="map-station-name">${this.name}</span>
+//<span class="map-station-address">${this.address}</span>
+//</div>
+
+.map-window-info {
+  .map-station-name {
+   display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: $white-color;
+  }
+  .map-station-address {
+    font-size: 1rem;
+    color: $white-color;
+  }
+}

@@ -33,12 +33,14 @@ export class PetrolStationInfoWidget {
 
 export function markerWindowPair(petrolStation: PetrolStationDto, map: google.maps.Map): MarkerWindowInfoPair {
   return {
+    id: petrolStation.id,
     marker: PetrolStationMarker.instanceOfMarkerFromPetrolStationDTO(petrolStation, map),
     windowInfo: PetrolStationInfoWidget.instanceOfWindowInfoFromPetrolStation(petrolStation),
   };
 }
 
 export declare type MarkerWindowInfoPair = {
+  id: number;
   marker: google.maps.Marker;
   windowInfo: google.maps.InfoWindow;
 };

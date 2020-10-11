@@ -1,7 +1,6 @@
 /// <reference types="@types/googlemaps" />
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {PetrolStationDto} from '../../../api-models/api-models';
-import {PetrolStationMarker} from "./petrol-station-info-widget/petrol-station-marker";
 import {MarkerWindowInfoPair, markerWindowPair} from "./petrol-station-info-widget/petrol-station-info-widget";
 
 @Component({
@@ -17,14 +16,30 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
   map: ElementRef;
   gmap: google.maps.Map;
 
+  markerPairs: MarkerWindowInfoPair[];
+
+  @Input()
+  set focusedPair(petrolStationId: number | undefined) {
+    if (!petrolStationId || !this.markerPairs) {
+      return;
+    }
+    const result = this.markerPairs.filter(markerPair => markerPair.id === petrolStationId);
+    if (result?.length > 0) {
+      const pairToFocusOn = result[0];
+      this.attachFocus(pairToFocusOn);
+    }
+  }
+
+  focusedPairProp: MarkerWindowInfoPair;
+
 
   @Input('items')
   set petrolStations(petrolStations: PetrolStationDto[]) {
     this.petrolStationsProp = petrolStations;
-    const pairs = this.petrolStationsProp.map(
+    this.markerPairs = this.petrolStationsProp.map(
       petrolStation => markerWindowPair(petrolStation, this.gmap)
     );
-    pairs.forEach( pair => pair.marker.addListener('click', () => this.toggleBounce(pair)));
+    this.markerPairs.forEach(pair => pair.marker.addListener('click', () => this.toggleBounce(pair)));
   }
 
   ngOnInit() {
@@ -45,11 +60,27 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
   }
 
   toggleBounce = (pair: MarkerWindowInfoPair) => {
-    if (pair.marker.getAnimation() !== null) {
-      pair.marker.setAnimation(null);
+    if (this.checkIfPairFocused(pair)) {
+      this.removeFocus(pair);
     } else {
-      pair.marker.setAnimation(google.maps.Animation.BOUNCE);
-      pair.windowInfo.open(this.gmap, pair.marker);
+      this.attachFocus(pair);
     }
+  }
+
+  checkIfPairFocused(pair: MarkerWindowInfoPair) {
+    return pair === this.focusedPairProp;
+  }
+
+  attachFocus(pair: MarkerWindowInfoPair) {
+    pair.marker.setAnimation(google.maps.Animation.BOUNCE);
+    pair.windowInfo.open(this.gmap, pair.marker);
+    this.removeFocus(this.focusedPairProp);
+    this.focusedPairProp = pair;
+  }
+
+  removeFocus(pair: MarkerWindowInfoPair) {
+    pair?.marker?.setAnimation(null);
+    pair?.windowInfo?.close();
+    this.focusedPairProp = null;
   }
 }
