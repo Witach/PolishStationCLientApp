@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080',
-  markerUrl: '/assets/img/petrol-station-marker.png'
+  markerUrl: '/assets/img/petrol-station-marker.png',
+  userMarkerUrl: '/assets/img/user-location-icon.png',
 };
 
 /*

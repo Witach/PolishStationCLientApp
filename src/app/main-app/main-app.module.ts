@@ -22,6 +22,10 @@ import {DualToggleEventService} from './dual-presentator-toggle/dual-toggle-even
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptorInterceptor} from '../service/jwt-interceptor.interceptor';
 import {LayoutService} from '../service/layout.service';
+import { AdvancedFilterComponent } from './advanced-filter/advanced-filter.component';
+import {MatRadioModule} from "@angular/material/radio";
+import {MatSliderModule} from "@angular/material/slider";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -34,7 +38,8 @@ import {LayoutService} from '../service/layout.service';
     PriceFormatterPipe,
     MapListPresentatorComponent,
     DualPresentatorComponent,
-    DualPresentatorToggleComponent
+    DualPresentatorToggleComponent,
+    AdvancedFilterComponent,
   ],
   providers: [
     DualToggleEventService,
@@ -51,6 +56,9 @@ import {LayoutService} from '../service/layout.service';
     MatChipsModule,
     MatButtonToggleModule,
     ScrollingModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatSelectModule,
   ]
 })
 export class MainAppModule { }

@@ -3,6 +3,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 import {PetrolStationDto} from '../../../api-models/api-models';
 import {MarkerWindowInfoPair, markerWindowPair} from "./petrol-station-info-widget/petrol-station-info-widget";
 import {BehaviorSubject, Subscription} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-map-list-presentator',
@@ -58,6 +59,7 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
     console.log(this.petrolStationsProp);
     navigator.geolocation.getCurrentPosition( position => {
       this.gmap = this.googleMapInstance(position.coords.latitude, position.coords.longitude);
+      this.makeUserMarker(position.coords.latitude, position.coords.longitude);
       this.isInitialized.next(true);
     });
   }
@@ -94,5 +96,15 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
     pair?.marker?.setAnimation(null);
     pair?.windowInfo?.close();
     this.focusedPairProp = null;
+  }
+
+  makeUserMarker(lat: number, long: number) {
+    return new google.maps.Marker({
+      position: {lng: long, lat},
+      map: this.gmap,
+      draggable: false,
+      animation: google.maps.Animation.DROP,
+      icon: environment.userMarkerUrl
+    });
   }
 }

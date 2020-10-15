@@ -20,3 +20,7 @@
  overflow: hidden;
   @include full-screen;
 }
+app-advanced-filter-component {
+  position: fixed;
+  z-index: 3;
+}

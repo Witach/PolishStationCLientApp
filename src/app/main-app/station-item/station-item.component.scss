@@ -26,3 +26,17 @@ h2 {
   margin: 0;
   @include on-mobile-prop(flex-grow, 1, 0);
 }
+
+.link-button {
+  color: $dark-theme-color;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.list-item-actions {
+  width: 100%;
+  text-align: right;
+  padding-top: 5px;
+}

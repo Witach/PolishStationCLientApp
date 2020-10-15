@@ -1,5 +1,5 @@
 <cdk-virtual-scroll-viewport class="list-container" [itemSize]="items.length">
-  <app-station-item *cdkVirtualFor="let item of items" [item]="item" (click)="onListItemClick(item)"></app-station-item>
+  <app-station-item *cdkVirtualFor="let item of items" [item]="item" (showOnMap)="onListItemClick(item)"></app-station-item>
 </cdk-virtual-scroll-viewport>
 
 

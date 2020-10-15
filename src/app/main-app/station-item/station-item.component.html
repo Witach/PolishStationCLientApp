@@ -8,4 +8,9 @@
     {{item.localization.street}}
     {{item.localization.number}}
   </p>
+  <div class="list-item-actions">
+    <a [routerLink]="['/main','details', item.id]" class="link-button">Szczegóły</a>
+    <a class="link-button"> / </a>
+    <a (click)="showOnMap.emit(item)" class="link-button">Pokaż na mapie</a>
+  </div>
 </mat-card>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PetrolStationDto} from '../../../api-models/api-models';
 
 @Component({
@@ -10,6 +10,9 @@ export class StationItemComponent implements OnInit {
 
   @Input()
   item: PetrolStationDto;
+
+  @Output()
+  showOnMap = new EventEmitter<PetrolStationDto>();
 
   constructor() { }
 
