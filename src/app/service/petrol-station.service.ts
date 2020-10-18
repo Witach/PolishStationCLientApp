@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Page, PetrolStationDto} from '../../api-models/api-models';
 import {environment} from '../../environments/environment';
@@ -11,8 +11,10 @@ export class PetrolStationService {
 
   constructor(private http: HttpClient) { }
 
-  getPetrolStations(): Observable<Page<PetrolStationDto>> {
-    return this.http.get<Page<PetrolStationDto>>(`${environment.apiUrl}/petrol-station`);
+  getPetrolStations(params: any = {}): Observable<PetrolStationDto[]> {
+    const httpParams = Object.keys(params)
+      .reduce((prev: any, current: any, index: any) => prev.set(current, params[current]), new HttpParams());
+    return this.http.get<PetrolStationDto[]>(`${environment.apiUrl}/petrol-station`, {params: httpParams});
   }
 
 }

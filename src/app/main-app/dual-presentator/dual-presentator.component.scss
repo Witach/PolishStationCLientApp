@@ -24,3 +24,6 @@ app-advanced-filter-component {
   position: fixed;
   z-index: 3;
 }
+app-advanced-filter-component {
+  @include on-mobile-prop(width, 40%, 75%);
+}

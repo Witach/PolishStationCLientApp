@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FuelTypeService} from '../../service/fuel-type.service';
+import {MatRadioChange} from '@angular/material/radio';
 
 @Component({
   selector: 'app-advanced-filter-component',
@@ -7,10 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvancedFilterComponent implements OnInit {
   toggleValue = false;
+  fuelTypes: string[];
+  selectedFuelType = 'all';
+  selectedAvgOpinion = 1;
+  selectedDistance = 10;
+  selectedSorting = 'distance';
 
-  constructor() { }
+  @Output('filterClicked')
+  eventEmitter = new EventEmitter<any>();
+
+  constructor(private fuelTypeService: FuelTypeService) { }
 
   ngOnInit(): void {
+    this.fuelTypeService.getFuelTypes().subscribe(res => this.fuelTypes = res);
+  }
+
+  onRadioButtonChange(event: MatRadioChange) {
+     this.selectedFuelType = event.value;
   }
 
   formatLabel(value: number) {
@@ -18,6 +33,19 @@ export class AdvancedFilterComponent implements OnInit {
       return Math.round(value / 1000) + 'k';
     }
     return value;
+  }
+
+  onSubmit() {
+    const paramsObj = {};
+    if (this.selectedFuelType !== 'all')
+      paramsObj['fuelType'] = this.selectedFuelType;
+    if (this.selectedAvgOpinion !== 1)
+      paramsObj['avgOpinion'] = this.selectedAvgOpinion;
+    if (this.selectedDistance !== 10)
+      paramsObj['distance'] = this.selectedDistance;
+    if (this.selectedSorting !== 'distance')
+      paramsObj['sort'] = this.selectedSorting;
+    this.eventEmitter.emit(paramsObj);
   }
 
 }

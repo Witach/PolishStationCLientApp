@@ -5,6 +5,7 @@ export interface PetrolStationDto {
   name: string;
   petrolStationStats: PetrolStationStats;
   fuelPriceDTO: LastFuelPriceDTO[];
+  distance: number;
 }
 
 export interface PetrolStationStats {

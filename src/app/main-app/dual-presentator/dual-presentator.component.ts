@@ -7,6 +7,7 @@ import {PetrolStationDto} from "../../../api-models/api-models";
 import {petrolStations} from "../../../stub/petrols-stations";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {BreakpointState} from "@angular/cdk/layout/breakpoints-observer";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-dual-presentator',
@@ -44,7 +45,13 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
       (stateName) => this.onTogglePresenterState(stateName)
     );
     this.petrolStationService.getPetrolStations().subscribe(
-      (stations) => this.items = stations.content
+      (stations) => this.items = stations
+    );
+  }
+
+  onFilterButtonClick(event: any): void {
+    this.petrolStationService.getPetrolStations(event).subscribe(
+      (stations) => this.items = stations
     );
   }
 

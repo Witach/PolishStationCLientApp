@@ -3,15 +3,15 @@
 .main-container {
   background: $white-color;
   padding: 10px;
+  @include full-width;
   @include default-box-shadow;
   margin-top: 25px;
   @include transition-of-property(margin-left, 0.4s);
-  margin-left: -100vw;
+  @include on-mobile-prop(margin-left, -100vw, -250vw);
 }
 
 .show-button {
   position: absolute;
-  right: -22px;
   top: 25px;
   background: $white-color;
   @include default-box-shadow;
@@ -31,4 +31,12 @@ mat-slider {
 
 .filter-opened {
   margin-left: 0;
+}
+
+mat-radio-group {
+  @include flex-list(25%);
+  flex-wrap: wrap;
+  > mat-radio-button {
+    margin: 5px 0;
+  }
 }
