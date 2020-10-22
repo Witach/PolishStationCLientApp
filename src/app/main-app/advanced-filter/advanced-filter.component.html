@@ -1,5 +1,5 @@
-<span class="show-button" (click)="toggleValue = !toggleValue"><mat-icon>filter_alt</mat-icon></span>
-<div class="main-container" [class.filter-opened]="toggleValue">
+<span class="show-button" (click)="switchToggle()"><mat-icon>filter_alt</mat-icon></span>
+<div class="main-container" *ngIf="toggleValue" @myInsertRemoveTrigger>
   <div class="spec-fuel">
     <h5 class="filter-label">Wybierz rodzaj paliwa:</h5>
     <mat-radio-group color="primary" (change)="this.onRadioButtonChange($event)">

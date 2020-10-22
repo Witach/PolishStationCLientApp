@@ -6,8 +6,6 @@
   @include full-width;
   @include default-box-shadow;
   margin-top: 25px;
-  @include transition-of-property(margin-left, 0.4s);
-  @include on-mobile-prop(margin-left, -100vw, -250vw);
 }
 
 .show-button {
