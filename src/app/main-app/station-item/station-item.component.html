@@ -4,9 +4,7 @@
     <app-fuel-prices [items]="item.fuelPriceDTO"></app-fuel-prices>
   </div>
   <p class="side-info">
-    {{item.localization.name}}
-    {{item.localization.street}}
-    {{item.localization.number}}
+    {{item.localization.formattedAddress}}
   </p>
   <div class="list-item-actions">
     <a [routerLink]="['/main','details', item.id]" class="link-button">Szczegóły</a>

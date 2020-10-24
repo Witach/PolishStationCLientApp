@@ -8,6 +8,7 @@ import {petrolStations} from "../../../stub/petrols-stations";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {BreakpointState} from "@angular/cdk/layout/breakpoints-observer";
 import {HttpParams} from "@angular/common/http";
+import {StoreService} from "../../service/store.service";
 
 @Component({
   selector: 'app-dual-presentator',
@@ -34,7 +35,8 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
 
   constructor(private dualToggleEvnetService: DualToggleEventService,
               private petrolStationService: PetrolStationService,
-              private breakpointObserver: BreakpointObserver) {
+              private breakpointObserver: BreakpointObserver,
+              private storeService: StoreService) {
     this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Medium, Breakpoints.XSmall]).subscribe(
       res => this.onResolutionChange(res)
     );
@@ -44,13 +46,18 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
     this.eventSub = this.dualToggleEvnetService.toggleEvent$.subscribe(
       (stateName) => this.onTogglePresenterState(stateName)
     );
-    this.petrolStationService.getPetrolStations().subscribe(
-      (stations) => this.items = stations
-    );
+    navigator.geolocation.getCurrentPosition( position => {
+      this.storeService.userPosition = position;
+      this.petrolStationService.getPetrolStations({lat: position.coords.latitude, long: position.coords.longitude, maxDistance: 10}).subscribe(
+        (stations) => this.items = stations
+      );
+    });
   }
 
   onFilterButtonClick(event: any): void {
-    this.petrolStationService.getPetrolStations(event).subscribe(
+    const position = this.storeService.userPosition;
+    const params = {lat: position.coords.latitude, long: position.coords.longitude, ...event};
+    this.petrolStationService.getPetrolStations(params).subscribe(
       (stations) => this.items = stations
     );
   }

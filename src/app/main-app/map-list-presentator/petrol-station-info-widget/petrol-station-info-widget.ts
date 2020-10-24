@@ -11,7 +11,7 @@ export class PetrolStationInfoWidget {
 
   constructor(prop: PetrolStationDto, private gmap: google.maps.Map) {
     this.name = prop.name;
-    this.address = prop.localization.name + ', ' + prop.localization.street + ' ' + prop.localization.number;
+    this.address = prop.localization.formattedAddress;
     this.prices = prop.fuelPriceDTO;
     this.lat = Number(prop.localization.lat);
     this.long = Number(prop.localization.long);

@@ -54,8 +54,8 @@ export class AdvancedFilterComponent implements OnInit {
       paramsObj['fuelType'] = this.selectedFuelType;
     if (this.selectedAvgOpinion !== 1)
       paramsObj['avgOpinion'] = this.selectedAvgOpinion;
-    if (this.selectedDistance !== 10)
-      paramsObj['distance'] = this.selectedDistance;
+    if (this.selectedDistance)
+      paramsObj['maxDistance'] = this.selectedDistance;
     if (this.selectedSorting !== 'distance')
       paramsObj['sort'] = this.selectedSorting;
     this.eventEmitter.emit(paramsObj);

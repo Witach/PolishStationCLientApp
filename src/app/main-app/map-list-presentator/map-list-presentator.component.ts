@@ -4,6 +4,7 @@ import {PetrolStationDto} from '../../../api-models/api-models';
 import {MarkerWindowInfoPair, markerWindowPair} from "./petrol-station-info-widget/petrol-station-info-widget";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {environment} from "../../../environments/environment";
+import {StoreService} from "../../service/store.service";
 
 @Component({
   selector: 'app-map-list-presentator',
@@ -19,8 +20,12 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
   map: ElementRef;
   gmap: google.maps.Map;
 
-  markerPairs: MarkerWindowInfoPair[];
+  markerPairs: MarkerWindowInfoPair[] = [];
   petrolStationsSub: Subscription;
+
+
+  constructor(private storeService: StoreService) {
+  }
 
   @Input()
   set focusedPair(petrolStationId: number | undefined) {
@@ -42,6 +47,7 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
     this.petrolStationsProp = petrolStations;
     this.petrolStationsSub = this.isInitialized.subscribe(isInitial => {
       if (isInitial) {
+        this.markerPairs.forEach( marker => marker.marker.setMap(null));
         this.markerPairs = this.petrolStationsProp.map(
           petrolStation => markerWindowPair(petrolStation, this.gmap)
         );
@@ -59,6 +65,7 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
     console.log(this.petrolStationsProp);
     navigator.geolocation.getCurrentPosition( position => {
       this.gmap = this.googleMapInstance(position.coords.latitude, position.coords.longitude);
+      this.storeService.userPosition = position;
       this.makeUserMarker(position.coords.latitude, position.coords.longitude);
       this.isInitialized.next(true);
     });

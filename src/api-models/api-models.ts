@@ -22,6 +22,7 @@ export interface LocalizationDto {
   postalCode: string;
   province: string;
   street: string;
+  formattedAddress: string;
 }
 
 export interface AppUserDTO {
