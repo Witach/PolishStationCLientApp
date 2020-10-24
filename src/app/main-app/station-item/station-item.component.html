@@ -1,7 +1,7 @@
 <mat-card class="small-card">
   <div class="card-info-container">
     <h2>{{item.name}}</h2>
-    <app-fuel-prices [items]="item.fuelPriceDTO"></app-fuel-prices>
+    <app-fuel-prices [items]="item" ></app-fuel-prices>
   </div>
   <p class="side-info">
     {{item.localization.formattedAddress}}

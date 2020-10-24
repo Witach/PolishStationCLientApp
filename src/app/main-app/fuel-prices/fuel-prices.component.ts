@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LastFuelPriceDTO} from "../../../api-models/api-models";
+import {FuelTypeDto, LastFuelPriceDTO, PetrolStationDto} from "../../../api-models/api-models";
 
 @Component({
   selector: 'app-fuel-prices',
@@ -8,8 +8,16 @@ import {LastFuelPriceDTO} from "../../../api-models/api-models";
 })
 export class FuelPricesComponent implements OnInit {
 
+  _items: LastFuelPriceDTO[];
+  _types: string[];
+
   @Input()
-  items: LastFuelPriceDTO[];
+  set items(petrolStation: PetrolStationDto) {
+     this._items = petrolStation.fuelPriceDTO;
+     const namesOfPricesType = petrolStation.fuelPriceDTO.map(price => price.fuelType);
+     this._types = petrolStation.fuelTypes
+       .filter(type => !namesOfPricesType.includes(type));
+  }
 
   constructor() { }
 

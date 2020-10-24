@@ -1,6 +1,9 @@
 <mat-chip color="primary" class="prices-container">
-  <div class="price-item"  *ngFor="let prcie of items">
+  <div class="price-item"  *ngFor="let prcie of _items">
     <span>{{prcie.fuelType}}</span>
-    <span>{{prcie.price | priceFormatter}}</span>
+    <span>{{(prcie.price | priceFormatter) || ""}}</span>
+  </div>
+  <div class="price-item"  *ngFor="let type of _types">
+    <span>{{type}}</span>
   </div>
 </mat-chip>
