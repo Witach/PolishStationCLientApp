@@ -6,6 +6,7 @@ import {FuelTypeDto, PetrolStationDto} from "../../../api-models/api-models";
 import {environment} from "../../../environments/environment";
 import {Subscription} from "rxjs";
 import {FuelTypeService} from "../../service/fuel-type.service";
+import {coerceBooleanProperty} from "@angular/cdk/coercion";
 
 @Component({
   selector: 'app-petrol-station-details',
@@ -32,7 +33,11 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   fuelTypesCheckboxes: { fuelType: string, checkboxValue: boolean }[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private petrolStationService: PetrolStationService, private fuelTypeService: FuelTypeService) {
+  fuelTypeCopy = [];
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private petrolStationService: PetrolStationService,
+              private fuelTypeService: FuelTypeService) {
   }
 
   ngOnInit(): void {
@@ -55,9 +60,10 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
     );
     this.fuelTypeService.getFuelTypes().subscribe(fuelTypes => {
       const mappedFuelTypes = fuelTypes.map(fuelType => {
-        return {fuelType, checkboxValue: true};
+        return {fuelType, checkboxValue: false};
       });
       this.fuelTypesCheckboxes = this.fuelTypesCheckboxes.concat(mappedFuelTypes);
+      this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
     });
   }
 
@@ -103,6 +109,60 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
     if (!this.isClicked) {
       this.clickedGradeId = i;
       this.isClicked = true;
+    }
+  }
+
+  approveFuelTypeChanges() {
+    let flag = false;
+    this.fuelTypeCopy.forEach((val, inex) => {
+      if (this.fuelTypesCheckboxes[inex].checkboxValue !== val.checkboxValue) {
+        flag = true;
+      }
+    });
+    if (flag) {
+      const postDTO = {
+        dkn: this.station.dkn,
+        fuelTypes: this.fuelTypesCheckboxes.filter(fuelType => fuelType.checkboxValue).map(fuelType => fuelType.fuelType),
+        localization: {
+          name: this.station.localization.name,
+          street: this.station.localization.street,
+          number: this.station.localization.number,
+          postalCode: this.station.localization.postalCode,
+          province: this.station.localization.province,
+        },
+        name: this.station.name,
+        isWC: this.station.petrolStationStats.isWC,
+        isWCFree: this.station.petrolStationStats.isWCFree,
+        isRestaurant: this.station.petrolStationStats.isRestaurant,
+        isCompressor: this.station.petrolStationStats.isCompressor,
+        isCarWash: this.station.petrolStationStats.isCarWash,
+      };
+      this.petrolStationService.updatePetrolStation(this.station.id, postDTO).subscribe(() => {
+        this.initSub = this.activatedRoute.paramMap.pipe(
+          switchMap(param => this.petrolStationService.getPetrolStationById(Number(param.get('id')))),
+          tap(() => {
+            setTimeout(() => {
+              this.gmap = this.initMap();
+              this.makeUserMarker(Number(this.station.localization.lat), Number(this.station.localization.long));
+            }, 0);
+          })
+        ).subscribe(
+          petrolStation => {
+            this.station = petrolStation;
+            this.fuelTypesCheckboxes = petrolStation.fuelTypes.map(fuelType => {
+              return {fuelType, checkboxValue: true};
+            });
+            console.log(this.station);
+          }
+        );
+        this.fuelTypeService.getFuelTypes().subscribe(fuelTypes => {
+          const mappedFuelTypes = fuelTypes.map(fuelType => {
+            return {fuelType, checkboxValue: false};
+          });
+          this.fuelTypesCheckboxes = this.fuelTypesCheckboxes.concat(mappedFuelTypes);
+          this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
+        });
+      });
     }
   }
 }

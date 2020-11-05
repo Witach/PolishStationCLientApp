@@ -111,6 +111,11 @@ export interface PetrolStationPostDto {
   fuelTypes: string[];
   localization: LocalizationPostDto;
   name: string;
+  isWCFree: boolean;
+  isWC: boolean;
+  isRestaurant: boolean;
+  isCompressor: boolean;
+  isCarWash: boolean;
 }
 
 export interface LastFuelPriceDTO {

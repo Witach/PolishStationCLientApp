@@ -27,7 +27,7 @@
             <section class="fuel-types-container">
               <mat-checkbox *ngFor="let fuelTypeCheckbox of fuelTypesCheckboxes" class="fuel-type-checkbox" [(ngModel)]="fuelTypeCheckbox.checkboxValue">{{fuelTypeCheckbox.fuelType}}</mat-checkbox>
             </section>
-            <button class="approval-button" mat-raised-button color="primary">Approve changes</button>
+            <button class="approval-button" mat-raised-button color="primary" (click)="approveFuelTypeChanges()">Approve changes</button>
           </div>
         </div>
         <div class="price-info">

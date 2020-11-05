@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Page, PetrolStationDto} from '../../api-models/api-models';
+import {Page, PetrolStationDto, PetrolStationPostDto} from '../../api-models/api-models';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -19,6 +19,10 @@ export class PetrolStationService {
 
   getPetrolStationById(id: number): Observable<PetrolStationDto> {
     return this.http.get<PetrolStationDto>(`${environment.apiUrl}/petrol-station/` + id );
+  }
+
+  updatePetrolStation(id: number, obj: PetrolStationPostDto): Observable<void> {
+    return this.http.patch<void>(`${environment.apiUrl}/petrol-station/` + id , obj);
   }
 
 }
