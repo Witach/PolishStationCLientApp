@@ -1,0 +1,93 @@
+<div class="main-container">
+  <div  class="mat-card" >
+    <div class="mat-card-header" >
+      <div class="mat-card-title">
+         <div class="name-container">
+           <h2>{{station?.name || ''}}</h2>
+           <table>
+             <tr>
+               <td class="small-text">Lat: </td>
+               <td class="small-text">{{station?.localization.lat || ''}}</td>
+             </tr>
+             <tr>
+               <td class="small-text">Long: </td>
+               <td class="small-text">{{station?.localization.long || ''}}</td>
+             </tr>
+           </table>
+         </div>
+        <span class="side-info">{{station?.localization.formattedAddress || ''}}</span>
+      </div>
+      <div #gmap id="map">
+      </div>
+      <div class="info-container">
+        <div class="fuel-type-info">
+          <div class="header-container">
+            <h5 class="mat-card-title">Avaliable fuel types</h5>
+            <div class="line-separator"></div>
+            <section class="fuel-types-container">
+              <mat-checkbox *ngFor="let fuelTypeCheckbox of fuelTypesCheckboxes" class="fuel-type-checkbox" [(ngModel)]="fuelTypeCheckbox.checkboxValue">{{fuelTypeCheckbox.fuelType}}</mat-checkbox>
+            </section>
+            <button class="approval-button" mat-raised-button color="primary">Approve changes</button>
+          </div>
+        </div>
+        <div class="price-info">
+          <div class="header-container">
+            <h5 class="mat-card-title">Latest prices</h5>
+            <div class="line-separator"></div>
+            <section class="fuel-price-container">
+              <div class="fuel-price-elem-container" *ngFor="let fuelPrice of station?.fuelPriceDTO || []">
+                <span class="date-label">{{fuelPrice.date}}</span>
+                <div  class="fuel-price-elem">{{fuelPrice.fuelType}} {{fuelPrice.price}}</div>
+              </div>
+              <div class="input-section">
+                <mat-form-field appearance="outline">
+                  <mat-label>Price</mat-label>
+                  <input type="number" step="0.01" min="0.01" matInput placeholder="Price">
+                  <mat-icon matSuffix>monetization_on</mat-icon>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="fuel-type-selector">
+                  <mat-label>Fuel type</mat-label>
+                  <mat-select>
+                    <mat-option value="type" *ngFor="let type of station.fuelTypes">{{type}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <button class="price-approval-button" mat-raised-button color="primary">Add price</button>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="opinion-info">
+          <div class="header-container">
+            <h5 class="mat-card-title">Opinions</h5>
+            <div class="line-separator"></div>
+            <div class="comment-wrapper">
+              <div class="comments-container">
+                <span class="rate" >{{station.petrolStationStats.avgOpinion || "--"}} </span>
+                <span class="rate-icon" ><mat-icon>grade</mat-icon></span>
+              </div>
+              <div class="comment-input">
+                <mat-icon class="grade-to-click" *ngFor="let i of [1, 2, 3, 4, 5]" (mouseenter)="mouseEnter(i)"  (mouseleave)="mouseLeave(i)" [class.red-grade]="hoveredGradeId >= i || clickedGradeId >= i" (click)="onGradeClick(i)">grade</mat-icon>
+              </div>
+            </div>
+            <button class="approval-button grade-button" mat-raised-button color="primary">Approve changes</button>
+          </div>
+        </div>
+        <div class="facilities-info">
+          <div class="header-container">
+            <h5 class="mat-card-title">Facilities</h5>
+            <div class="line-separator"></div>
+            <section class="facility-container">
+              <mat-checkbox matTooltip="Dostępna myjnia samochodowa" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isCarWash"><mat-icon>local_car_wash</mat-icon></mat-checkbox>
+              <mat-checkbox matTooltip="Dostępny kompresor do pompowania kół" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isCompressor">Compressor</mat-checkbox>
+              <mat-checkbox matTooltip="Na stacji można kupić hot dogi" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isHotDogs">Hot dogs</mat-checkbox>
+              <mat-checkbox matTooltip="Na stacji jest dostępna restauracja" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isRestaurant"><mat-icon>restaurant_menu</mat-icon></mat-checkbox>
+              <mat-checkbox matTooltip="Na stacji dostępna jest toaleta" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isWC"><mat-icon>wc</mat-icon></mat-checkbox>
+              <mat-checkbox matTooltip="Toaleta jest darmowa" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isWCFree"><mat-icon>wc</mat-icon> Free</mat-checkbox>
+            </section>
+            <button class="approval-button" mat-raised-button color="primary">Approve changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

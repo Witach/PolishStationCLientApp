@@ -17,4 +17,8 @@ export class PetrolStationService {
     return this.http.get<PetrolStationDto[]>(`${environment.apiUrl}/petrol-station`, {params: httpParams});
   }
 
+  getPetrolStationById(id: number): Observable<PetrolStationDto> {
+    return this.http.get<PetrolStationDto>(`${environment.apiUrl}/petrol-station/` + id );
+  }
+
 }

@@ -26,6 +26,9 @@ import { AdvancedFilterComponent } from './advanced-filter/advanced-filter.compo
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatSelectModule} from "@angular/material/select";
+import { PetrolStationDetailsComponent } from './petrol-station-details/petrol-station-details.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -40,25 +43,28 @@ import {MatSelectModule} from "@angular/material/select";
     DualPresentatorComponent,
     DualPresentatorToggleComponent,
     AdvancedFilterComponent,
+    PetrolStationDetailsComponent,
   ],
   providers: [
     DualToggleEventService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
     LayoutService,
   ],
-  imports: [
-    MainAppRoutingModule,
-    CommonModule,
-    SharedModule,
-    WidgetsModule,
-    MatSidenavModule,
-    MatListModule,
-    MatChipsModule,
-    MatButtonToggleModule,
-    ScrollingModule,
-    MatRadioModule,
-    MatSliderModule,
-    MatSelectModule,
-  ]
+    imports: [
+        MainAppRoutingModule,
+        CommonModule,
+        SharedModule,
+        WidgetsModule,
+        MatSidenavModule,
+        MatListModule,
+        MatChipsModule,
+        MatButtonToggleModule,
+        ScrollingModule,
+        MatRadioModule,
+        MatSliderModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatTooltipModule,
+    ]
 })
 export class MainAppModule { }

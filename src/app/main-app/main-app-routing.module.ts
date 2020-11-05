@@ -5,6 +5,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {StationItemComponent} from './station-item/station-item.component';
 import {AuthGuard} from '../service/auth.guard';
 import {DualPresentatorComponent} from './dual-presentator/dual-presentator.component';
+import {PetrolStationDetailsComponent} from './petrol-station-details/petrol-station-details.component';
 
 const routes: Routes = [
   { path: 'main', component: MainAppComponent, canActivate: [AuthGuard],
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'petrol-list', component: DualPresentatorComponent },
       { path: 'petrol-item', component: StationItemComponent },
+      { path: 'petrol-item/:id', component: PetrolStationDetailsComponent },
     ] },
 ];
 

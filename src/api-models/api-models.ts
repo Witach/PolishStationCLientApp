@@ -13,6 +13,12 @@ export interface PetrolStationStats {
   amountOfOpinion: number;
   avgOpinion: number;
   avgPrice: number;
+  isHotDogs: boolean;
+  isWCFree: boolean;
+  isWC: boolean;
+  isRestaurant: boolean;
+  isCompressor: boolean;
+  isCarWash: boolean;
 }
 
 export interface LocalizationDto {
