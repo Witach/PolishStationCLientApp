@@ -7,6 +7,9 @@ import {environment} from "../../../environments/environment";
 import {Subscription} from "rxjs";
 import {FuelTypeService} from "../../service/fuel-type.service";
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
+import {OpinionService} from "../../service/opinion.service";
+import {StoreService} from "../../service/store.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-petrol-station-details',
@@ -17,7 +20,7 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   station: PetrolStationDto;
 
-  @ViewChild('gmap')
+  @ViewChild('gmap', {static: false})
   map: ElementRef;
   gmap: google.maps.Map;
 
@@ -37,37 +40,18 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private petrolStationService: PetrolStationService,
-              private fuelTypeService: FuelTypeService) {
+              private fuelTypeService: FuelTypeService,
+              private opinionService: OpinionService,
+              private storeService: StoreService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.initSub = this.activatedRoute.paramMap.pipe(
-      switchMap(param => this.petrolStationService.getPetrolStationById(Number(param.get('id')))),
-      tap(() => {
-        setTimeout(() => {
-          this.gmap = this.initMap();
-          this.makeUserMarker(Number(this.station.localization.lat), Number(this.station.localization.long));
-        }, 0);
-      })
-    ).subscribe(
-      petrolStation => {
-        this.station = petrolStation;
-        this.fuelTypesCheckboxes = petrolStation.fuelTypes.map(fuelType => {
-          return {fuelType, checkboxValue: true};
-        });
-        console.log(this.station);
-      }
-    );
-    this.fuelTypeService.getFuelTypes().subscribe(fuelTypes => {
-      const mappedFuelTypes = fuelTypes.map(fuelType => {
-        return {fuelType, checkboxValue: false};
-      });
-      this.fuelTypesCheckboxes = this.fuelTypesCheckboxes.concat(mappedFuelTypes);
-      this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
-    });
+
   }
 
   ngAfterViewInit(): void {
+    this.initComponent();
   }
 
   initMap(): google.maps.Map {
@@ -109,6 +93,13 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
     if (!this.isClicked) {
       this.clickedGradeId = i;
       this.isClicked = true;
+      this.authService.currentUserSubject.pipe(
+        switchMap(user => this.opinionService.sendOpinion({
+        mark: this.clickedGradeId,
+        petrolStationId: this.station.id,
+        userId: user.id
+      }))
+      ).subscribe();
     }
   }
 
@@ -138,31 +129,32 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
         isCarWash: this.station.petrolStationStats.isCarWash,
       };
       this.petrolStationService.updatePetrolStation(this.station.id, postDTO).subscribe(() => {
-        this.initSub = this.activatedRoute.paramMap.pipe(
-          switchMap(param => this.petrolStationService.getPetrolStationById(Number(param.get('id')))),
-          tap(() => {
-            setTimeout(() => {
-              this.gmap = this.initMap();
-              this.makeUserMarker(Number(this.station.localization.lat), Number(this.station.localization.long));
-            }, 0);
-          })
-        ).subscribe(
-          petrolStation => {
-            this.station = petrolStation;
-            this.fuelTypesCheckboxes = petrolStation.fuelTypes.map(fuelType => {
-              return {fuelType, checkboxValue: true};
-            });
-            console.log(this.station);
-          }
-        );
-        this.fuelTypeService.getFuelTypes().subscribe(fuelTypes => {
-          const mappedFuelTypes = fuelTypes.map(fuelType => {
-            return {fuelType, checkboxValue: false};
-          });
-          this.fuelTypesCheckboxes = this.fuelTypesCheckboxes.concat(mappedFuelTypes);
-          this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
-        });
+        this.initComponent();
       });
     }
+  }
+  initComponent(): void {
+    this.initSub = this.activatedRoute.paramMap.pipe(
+      switchMap(param => this.petrolStationService.getPetrolStationById(Number(param.get('id')))),
+      tap(() => {
+        setTimeout(() => {
+          this.gmap = this.initMap();
+          this.makeUserMarker(Number(this.station.localization.lat), Number(this.station.localization.long));
+        }, 0);
+      })
+    ).subscribe(
+      petrolStation => {
+        this.station = petrolStation;
+        this.fuelTypesCheckboxes = petrolStation.fuelTypes.map(fuelType => {
+          return {fuelType, checkboxValue: true};
+        });
+        this.fuelTypeService.getFuelTypes().subscribe(fuelTypes => {
+          this.fuelTypesCheckboxes = fuelTypes.map(fuelType => {
+            return {fuelType, checkboxValue: this.station.fuelTypes.includes(fuelType)};
+          });
+          this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
+        });
+      }
+    );
   }
 }

@@ -48,7 +48,7 @@
                 <mat-form-field appearance="outline" class="fuel-type-selector">
                   <mat-label>Fuel type</mat-label>
                   <mat-select>
-                    <mat-option value="type" *ngFor="let type of station.fuelTypes">{{type}}</mat-option>
+                    <mat-option value="type" *ngFor="let type of station?.fuelTypes || []">{{type}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <button class="price-approval-button" mat-raised-button color="primary">Add price</button>
@@ -62,14 +62,13 @@
             <div class="line-separator"></div>
             <div class="comment-wrapper">
               <div class="comments-container">
-                <span class="rate" >{{station.petrolStationStats.avgOpinion || "--"}} </span>
+                <span class="rate" >{{station?.petrolStationStats.avgOpinion || "--"}} </span>
                 <span class="rate-icon" ><mat-icon>grade</mat-icon></span>
               </div>
               <div class="comment-input">
                 <mat-icon class="grade-to-click" *ngFor="let i of [1, 2, 3, 4, 5]" (mouseenter)="mouseEnter(i)"  (mouseleave)="mouseLeave(i)" [class.red-grade]="hoveredGradeId >= i || clickedGradeId >= i" (click)="onGradeClick(i)">grade</mat-icon>
               </div>
             </div>
-            <button class="approval-button grade-button" mat-raised-button color="primary">Approve changes</button>
           </div>
         </div>
         <div class="facilities-info">
@@ -77,12 +76,12 @@
             <h5 class="mat-card-title">Facilities</h5>
             <div class="line-separator"></div>
             <section class="facility-container">
-              <mat-checkbox matTooltip="Dostępna myjnia samochodowa" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isCarWash"><mat-icon>local_car_wash</mat-icon></mat-checkbox>
-              <mat-checkbox matTooltip="Dostępny kompresor do pompowania kół" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isCompressor">Compressor</mat-checkbox>
-              <mat-checkbox matTooltip="Na stacji można kupić hot dogi" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isHotDogs">Hot dogs</mat-checkbox>
-              <mat-checkbox matTooltip="Na stacji jest dostępna restauracja" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isRestaurant"><mat-icon>restaurant_menu</mat-icon></mat-checkbox>
-              <mat-checkbox matTooltip="Na stacji dostępna jest toaleta" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isWC"><mat-icon>wc</mat-icon></mat-checkbox>
-              <mat-checkbox matTooltip="Toaleta jest darmowa" class="facility-checkbox" [(ngModel)]="station.petrolStationStats.isWCFree"><mat-icon>wc</mat-icon> Free</mat-checkbox>
+              <mat-checkbox matTooltip="Dostępna myjnia samochodowa" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isCarWash"><mat-icon>local_car_wash</mat-icon></mat-checkbox>
+              <mat-checkbox matTooltip="Dostępny kompresor do pompowania kół" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isCompressor">Compressor</mat-checkbox>
+              <mat-checkbox matTooltip="Na stacji można kupić hot dogi" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isHotDogs">Hot dogs</mat-checkbox>
+              <mat-checkbox matTooltip="Na stacji jest dostępna restauracja" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isRestaurant"><mat-icon>restaurant_menu</mat-icon></mat-checkbox>
+              <mat-checkbox matTooltip="Na stacji dostępna jest toaleta" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isWC"><mat-icon>wc</mat-icon></mat-checkbox>
+              <mat-checkbox matTooltip="Toaleta jest darmowa" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isWCFree"><mat-icon>wc</mat-icon> Free</mat-checkbox>
             </section>
             <button class="approval-button" mat-raised-button color="primary">Approve changes</button>
           </div>
