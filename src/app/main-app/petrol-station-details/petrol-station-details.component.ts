@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {ActivatedRoute} from '@angular/router';
 import {PetrolStationService} from '../../service/petrol-station.service';
 import {switchMap, tap} from 'rxjs/operators';
-import {FuelTypeDto, PetrolStationDto, PetrolStationPostDto} from '../../../api-models/api-models';
+import {FuelPricePostDto, FuelTypeDto, PetrolStationDto, PetrolStationPostDto} from '../../../api-models/api-models';
 import {environment} from '../../../environments/environment';
 import {Subscription} from 'rxjs';
 import {FuelTypeService} from '../../service/fuel-type.service';
@@ -35,7 +35,11 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   fuelTypesCheckboxes: { fuelType: string, checkboxValue: boolean }[] = [];
 
+  fuelPrice: number;
+  selectedFuelType: string;
+
   fuelTypeCopy = [];
+  private stationCopy: PetrolStationDto;
 
   constructor(private activatedRoute: ActivatedRoute,
               private petrolStationService: PetrolStationService,
@@ -46,7 +50,23 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+  }
 
+  stringifyDate(date: Date): string {
+    const tzo = -date.getTimezoneOffset();
+    const dif = tzo >= 0 ? '+' : '-';
+    const pad = (num) => {
+      const norm = Math.floor(Math.abs(num));
+      return (norm < 10 ? '0' : '') + norm;
+    };
+    return date.getFullYear() +
+      '-' + pad(date.getMonth() + 1) +
+      '-' + pad(date.getDate()) +
+      'T' + pad(date.getHours()) +
+      ':' + pad(date.getMinutes()) +
+      ':' + pad(date.getSeconds()) +
+      dif + pad(tzo / 60) +
+      ':' + pad(tzo % 60);
   }
 
   ngAfterViewInit(): void {
@@ -96,12 +116,12 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
         mark: this.clickedGradeId,
         petrolStationId: this.station.id,
         userId: user.id
-      }).subscribe();
+      }).subscribe(() => this.initComponent());
     }
   }
 
   approveFuelTypeChanges() {
-    if (this.checkForFuelTypeChanges()) {
+    if (this.checkForFuelTypeChanges() || this.checkForFacilitiesChanges()) {
       const postDTO = this.generatePostDTOFromLocalChanged();
       this.petrolStationService.updatePetrolStation(this.station.id, postDTO)
         .subscribe(() => this.initComponent());
@@ -129,6 +149,7 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
       isRestaurant: this.station.petrolStationStats.isRestaurant,
       isCompressor: this.station.petrolStationStats.isCompressor,
       isCarWash: this.station.petrolStationStats.isCarWash,
+      isHotDogs: this.station.petrolStationStats.isHotDogs
     };
   }
 
@@ -148,7 +169,10 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
       this.makeUserMarker(Number(this.station.localization.lat), Number(this.station.localization.long));
     }, 0)
 
-  getFuelStationInfo = petrolStation => this.station = petrolStation;
+  getFuelStationInfo = petrolStation => {
+    this.station = petrolStation;
+    this.stationCopy = JSON.parse(JSON.stringify(petrolStation));
+  }
 
   prepareFuelTypeCheckboxes = petrolStation => {
     this.fuelTypeService.getFuelTypes().subscribe(this.createFuelTypeCheckboxContext);
@@ -180,5 +204,31 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
     const user = this.authService.currentUserSubject.getValue();
     this.opinionService.geUsersOpinions(user.email)
       .subscribe(this.opinionPrepareClosure(user));
+  }
+
+  private checkForFacilitiesChanges(): boolean {
+    return Object.keys(this.station.petrolStationStats).some(
+      key => this.station.petrolStationStats[key] !== this.stationCopy.petrolStationStats[key]
+    );
+  }
+
+  onAddPriceButtonCLicked(): void {
+    if (this.fuelPrice && this.selectedFuelType) {
+      const user = this.authService.currentUserSubject.getValue();
+      const fuelPriceDTO: FuelPricePostDto = {
+        appUserId: user.id,
+        fuelType: this.selectedFuelType,
+        petrolStationId: this.station.id,
+        price: this.fuelPrice,
+      };
+      this.petrolStationService.addFuelPrice(fuelPriceDTO).subscribe(
+        () => this.initComponent()
+      );
+    }
+  }
+
+  stringifyDateHumanReadable(date: string) {
+    const dateObj = new Date(date);
+    return dateObj.getDay() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear() + 'r';
   }
 }

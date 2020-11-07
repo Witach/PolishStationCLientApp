@@ -36,22 +36,22 @@
             <div class="line-separator"></div>
             <section class="fuel-price-container">
               <div class="fuel-price-elem-container" *ngFor="let fuelPrice of station?.fuelPriceDTO || []">
-                <span class="date-label">{{fuelPrice.date}}</span>
-                <div  class="fuel-price-elem">{{fuelPrice.fuelType}} {{fuelPrice.price}}</div>
+                <span class="date-label">{{stringifyDateHumanReadable(fuelPrice.date)}}</span>
+                <div  class="fuel-price-elem">{{fuelPrice.fuelType}} {{fuelPrice.price}}zł</div>
               </div>
               <div class="input-section">
                 <mat-form-field appearance="outline">
                   <mat-label>Price</mat-label>
-                  <input type="number" step="0.01" min="0.01" matInput placeholder="Price">
+                  <input [(ngModel)]="fuelPrice" type="number" step="0.01" min="0.01" matInput placeholder="Price">
                   <mat-icon matSuffix>monetization_on</mat-icon>
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="fuel-type-selector">
                   <mat-label>Fuel type</mat-label>
-                  <mat-select>
-                    <mat-option value="type" *ngFor="let type of station?.fuelTypes || []">{{type}}</mat-option>
+                  <mat-select [(ngModel)]="selectedFuelType">
+                    <mat-option  [value]="type" *ngFor="let type of station?.fuelTypes || []">{{type}}</mat-option>
                   </mat-select>
                 </mat-form-field>
-                <button class="price-approval-button" mat-raised-button color="primary">Add price</button>
+                <button class="price-approval-button" mat-raised-button color="primary" (click)="onAddPriceButtonCLicked()">Add price</button>
               </div>
             </section>
           </div>
@@ -64,6 +64,7 @@
               <div class="comments-container">
                 <span class="rate" >{{station?.petrolStationStats.avgOpinion || "--"}} </span>
                 <span class="rate-icon" ><mat-icon>grade</mat-icon></span>
+                <span class="rate rate-sepparator" >|</span> <span class="rate" >{{station?.petrolStationStats.amountOfOpinion || "--"}} </span> <span class="rate-icon" ><mat-icon>supervisor_account</mat-icon></span>
               </div>
               <div class="comment-input">
                 <mat-icon class="grade-to-click" *ngFor="let i of [1, 2, 3, 4, 5]" (mouseenter)="mouseEnter(i)"  (mouseleave)="mouseLeave(i)" [class.red-grade]="hoveredGradeId >= i || clickedGradeId >= i" (click)="onGradeClick(i)">grade</mat-icon>
@@ -83,7 +84,7 @@
               <mat-checkbox matTooltip="Na stacji dostępna jest toaleta" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isWC"><mat-icon>wc</mat-icon></mat-checkbox>
               <mat-checkbox matTooltip="Toaleta jest darmowa" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isWCFree"><mat-icon>wc</mat-icon> Free</mat-checkbox>
             </section>
-            <button class="approval-button" mat-raised-button color="primary">Approve changes</button>
+            <button class="approval-button" mat-raised-button color="primary" (click)="approveFuelTypeChanges()">Approve changes</button>
           </div>
         </div>
       </div>

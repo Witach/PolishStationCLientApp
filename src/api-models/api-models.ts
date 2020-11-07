@@ -86,7 +86,6 @@ export interface AppUserPostDto {
 
 export interface FuelPricePostDto {
   appUserId: number;
-  date: string;
   fuelType: string;
   petrolStationId: number;
   price: number;
@@ -116,6 +115,7 @@ export interface PetrolStationPostDto {
   isRestaurant: boolean;
   isCompressor: boolean;
   isCarWash: boolean;
+  isHotDogs: boolean;
 }
 
 export interface LastFuelPriceDTO {
