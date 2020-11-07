@@ -1,15 +1,14 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {PetrolStationService} from "../../service/petrol-station.service";
-import {switchMap, tap} from "rxjs/operators";
-import {FuelTypeDto, PetrolStationDto} from "../../../api-models/api-models";
-import {environment} from "../../../environments/environment";
-import {Subscription} from "rxjs";
-import {FuelTypeService} from "../../service/fuel-type.service";
-import {coerceBooleanProperty} from "@angular/cdk/coercion";
-import {OpinionService} from "../../service/opinion.service";
-import {StoreService} from "../../service/store.service";
-import {AuthService} from "../../service/auth.service";
+import {ActivatedRoute} from '@angular/router';
+import {PetrolStationService} from '../../service/petrol-station.service';
+import {switchMap, tap} from 'rxjs/operators';
+import {FuelTypeDto, PetrolStationDto, PetrolStationPostDto} from '../../../api-models/api-models';
+import {environment} from '../../../environments/environment';
+import {Subscription} from 'rxjs';
+import {FuelTypeService} from '../../service/fuel-type.service';
+import {OpinionService} from '../../service/opinion.service';
+import {StoreService} from '../../service/store.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-petrol-station-details',
@@ -26,11 +25,11 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   initSub: Subscription;
 
-  hoveredGradeId: number = 0;
+  hoveredGradeId = 0;
 
-  clickedGradeId: number = 0;
+  clickedGradeId = 0;
 
-  isClicked: boolean = false;
+  isClicked = false;
 
   fuelTypesApprovedFromServer: FuelTypeDto[];
 
@@ -91,77 +90,95 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   onGradeClick(i: number) {
     if (!this.isClicked) {
-      this.clickedGradeId = i;
-      this.isClicked = true;
-      this.authService.currentUserSubject.pipe(
-        switchMap(user => this.opinionService.sendOpinion({
+      this.setMark(i);
+      const user = this.authService.currentUserSubject.getValue();
+      this.opinionService.sendOpinion({
         mark: this.clickedGradeId,
         petrolStationId: this.station.id,
         userId: user.id
-      }))
-      ).subscribe();
+      }).subscribe();
     }
   }
 
   approveFuelTypeChanges() {
+    if (this.checkForFuelTypeChanges()) {
+      const postDTO = this.generatePostDTOFromLocalChanged();
+      this.petrolStationService.updatePetrolStation(this.station.id, postDTO)
+        .subscribe(() => this.initComponent());
+    }
+  }
+
+  checkForFuelTypeChanges() {
     let flag = false;
     this.fuelTypeCopy.forEach((val, inex) => {
       if (this.fuelTypesCheckboxes[inex].checkboxValue !== val.checkboxValue) {
         flag = true;
       }
     });
-    if (flag) {
-      const postDTO = {
-        dkn: this.station.dkn,
-        fuelTypes: this.fuelTypesCheckboxes.filter(fuelType => fuelType.checkboxValue).map(fuelType => fuelType.fuelType),
-        localization: {
-          name: this.station.localization.name,
-          street: this.station.localization.street,
-          number: this.station.localization.number,
-          postalCode: this.station.localization.postalCode,
-          province: this.station.localization.province,
-        },
-        name: this.station.name,
-        isWC: this.station.petrolStationStats.isWC,
-        isWCFree: this.station.petrolStationStats.isWCFree,
-        isRestaurant: this.station.petrolStationStats.isRestaurant,
-        isCompressor: this.station.petrolStationStats.isCompressor,
-        isCarWash: this.station.petrolStationStats.isCarWash,
-      };
-      this.petrolStationService.updatePetrolStation(this.station.id, postDTO).subscribe(() => {
-        this.initComponent();
-      });
-    }
+    return flag;
   }
+
+  generatePostDTOFromLocalChanged(): PetrolStationPostDto {
+    return {
+      dkn: this.station.dkn,
+      fuelTypes: this.fuelTypesCheckboxes.filter(fuelType => fuelType.checkboxValue).map(fuelType => fuelType.fuelType),
+      localization: {...this.station.localization},
+      name: this.station.name,
+      isWC: this.station.petrolStationStats.isWC,
+      isWCFree: this.station.petrolStationStats.isWCFree,
+      isRestaurant: this.station.petrolStationStats.isRestaurant,
+      isCompressor: this.station.petrolStationStats.isCompressor,
+      isCarWash: this.station.petrolStationStats.isCarWash,
+    };
+  }
+
   initComponent(): void {
     this.initSub = this.activatedRoute.paramMap.pipe(
       switchMap(param => this.petrolStationService.getPetrolStationById(Number(param.get('id')))),
-      tap(() => {
-        setTimeout(() => {
-          this.gmap = this.initMap();
-          this.makeUserMarker(Number(this.station.localization.lat), Number(this.station.localization.long));
-        }, 0);
-      })
-    ).subscribe(
-      petrolStation => {
-        this.station = petrolStation;
-        this.fuelTypesCheckboxes = petrolStation.fuelTypes.map(fuelType => {
-          return {fuelType, checkboxValue: true};
-        });
-        const user = this.authService.currentUserSubject.getValue();
-        this.opinionService.geUsersOpinions(user.email).subscribe(opinions => {
-          const flag = opinions.filter(opinion => opinion.userId === user.id && opinion.petrolStationId === this.station.id);
-          if (flag.length > 0) {
-              this.isClicked = true;
-              this.clickedGradeId = flag[0].mark;
-          }
-        });
-        this.fuelTypeService.getFuelTypes().subscribe(fuelTypes => {
-          this.fuelTypesCheckboxes = fuelTypes.map(fuelType => {
-            return {fuelType, checkboxValue: this.station.fuelTypes.includes(fuelType)};
-          });
-          this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
-        });
-      });
-    }
+      tap(this.initMapFun),
+      tap(this.getFuelStationInfo),
+      tap(this.prepareFuelTypeCheckboxes),
+      tap(this.prepareOpinion)
+    ).subscribe();
+  }
+
+  initMapFun = () =>
+    setTimeout(() => {
+      this.gmap = this.initMap();
+      this.makeUserMarker(Number(this.station.localization.lat), Number(this.station.localization.long));
+    }, 0)
+
+  getFuelStationInfo = petrolStation => this.station = petrolStation;
+
+  prepareFuelTypeCheckboxes = petrolStation => {
+    this.fuelTypeService.getFuelTypes().subscribe(this.createFuelTypeCheckboxContext);
+  }
+
+  createFuelTypeCheckboxContext = fuelTypes => {
+    this.fuelTypesCheckboxes = fuelTypes.map(fuelType => {
+      return {fuelType, checkboxValue: this.station.fuelTypes.includes(fuelType)};
+    });
+    this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
+  }
+
+  opinionPrepareClosure(user: any): any {
+    return opinions => {
+      const isOpinionOwnedByUser = opinion => opinion.userId === user.id && opinion.petrolStationId === this.station.id;
+      const usersOpinions = opinions.filter(isOpinionOwnedByUser);
+      if (usersOpinions.length > 0) {
+        this.setMark(usersOpinions[0].mark);
+      }
+    };
+  }
+
+  setMark(mark: number): void {
+    this.isClicked = true;
+    this.clickedGradeId = mark;
+  }
+
+  prepareOpinion = petrolStation => {
+    const user = this.authService.currentUserSubject.getValue();
+    this.opinionService.geUsersOpinions(user.email)
+      .subscribe(this.opinionPrepareClosure(user));
+  }
 }
