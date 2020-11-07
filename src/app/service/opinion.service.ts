@@ -14,4 +14,8 @@ export class OpinionService {
   sendOpinion(opinionPostDTO: OpinionPostDto): Observable<OpinionDto> {
     return this.http.post<OpinionDto>(environment.apiUrl + '/opinion', opinionPostDTO);
   }
+
+  geUsersOpinions(email: string): Observable<OpinionDto[]> {
+    return this.http.get<OpinionDto[]>(environment.apiUrl + '/opinion/user/' + email);
+  }
 }

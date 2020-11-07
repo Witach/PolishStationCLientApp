@@ -148,13 +148,20 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
         this.fuelTypesCheckboxes = petrolStation.fuelTypes.map(fuelType => {
           return {fuelType, checkboxValue: true};
         });
+        const user = this.authService.currentUserSubject.getValue();
+        this.opinionService.geUsersOpinions(user.email).subscribe(opinions => {
+          const flag = opinions.filter(opinion => opinion.userId === user.id && opinion.petrolStationId === this.station.id);
+          if (flag.length > 0) {
+              this.isClicked = true;
+              this.clickedGradeId = flag[0].mark;
+          }
+        });
         this.fuelTypeService.getFuelTypes().subscribe(fuelTypes => {
           this.fuelTypesCheckboxes = fuelTypes.map(fuelType => {
             return {fuelType, checkboxValue: this.station.fuelTypes.includes(fuelType)};
           });
           this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
         });
-      }
-    );
-  }
+      });
+    }
 }
