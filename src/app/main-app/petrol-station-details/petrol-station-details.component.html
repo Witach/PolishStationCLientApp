@@ -62,9 +62,9 @@
             <div class="line-separator"></div>
             <div class="comment-wrapper">
               <div class="comments-container">
-                <span class="rate" >{{station?.petrolStationStats.avgOpinion || "--"}} </span>
+                <span class="rate" >{{station?.petrolStationStats?.avgOpinion || "--"}} </span>
                 <span class="rate-icon" ><mat-icon>grade</mat-icon></span>
-                <span class="rate rate-sepparator" >|</span> <span class="rate" >{{station?.petrolStationStats.amountOfOpinion || "--"}} </span> <span class="rate-icon" ><mat-icon>supervisor_account</mat-icon></span>
+                <span class="rate rate-sepparator" >|</span> <span class="rate" >{{station?.petrolStationStats?.amountOfOpinion || "--"}} </span> <span class="rate-icon" ><mat-icon>supervisor_account</mat-icon></span>
               </div>
               <div class="comment-input">
                 <mat-icon class="grade-to-click" *ngFor="let i of [1, 2, 3, 4, 5]" (mouseenter)="mouseEnter(i)"  (mouseleave)="mouseLeave(i)" [class.red-grade]="hoveredGradeId >= i || clickedGradeId >= i" (click)="onGradeClick(i)">grade</mat-icon>
