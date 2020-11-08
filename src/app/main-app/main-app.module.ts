@@ -31,6 +31,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { CreateStationComponent } from './create-station/create-station.component';
 import {LoginModule} from "../login/login.module";
+import { EditPetrolStaionComponent } from './edit-petrol-staion/edit-petrol-staion.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {LoginModule} from "../login/login.module";
     AdvancedFilterComponent,
     PetrolStationDetailsComponent,
     CreateStationComponent,
+    EditPetrolStaionComponent,
   ],
   providers: [
     DualToggleEventService,

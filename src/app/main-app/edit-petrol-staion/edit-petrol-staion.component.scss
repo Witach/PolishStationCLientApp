@@ -198,16 +198,25 @@ h2 {
   padding-right: 15px;
 }
 
-.black-header {
-  color: black;
+.address-input-container {
+  @include flex-list(auto);
+  flex-direction: column;
+  > * {
+    @include on-mobile-prop(width,50%, 100%);
+    margin-top: 20px;
+  }
 }
 
-.edit-button {
-  margin-left: 10px;
-  width: 30px;
-  height: 30px;
-  mat-icon {
-    font-size: 1.2rem;
-    margin-top:  -8px
+.submit-button-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > * {
+    flex: 1 1 auto;
   }
+}
+
+mat-hint {
+  padding-top: 20px;
 }
