@@ -25,8 +25,14 @@ export class PetrolStationService {
     return this.http.patch<void>(`${environment.apiUrl}/petrol-station/` + id , obj);
   }
 
+  createPetrolStation(obj: PetrolStationPostDto): Observable<PetrolStationDto> {
+    return this.http.post<PetrolStationDto>(`${environment.apiUrl}/petrol-station`, obj);
+  }
+
   addFuelPrice(fuelPricePostDTO: FuelPricePostDto): Observable<void> {
     return this.http.post<void>(`${environment.apiUrl}/fuel-price`, fuelPricePostDTO);
   }
+
+
 
 }

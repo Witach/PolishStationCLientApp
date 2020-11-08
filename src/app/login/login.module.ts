@@ -12,19 +12,22 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 @NgModule({
-  declarations: [
-    LoginFormComponent,
-    LoginAppComponent,
-    SignUpFormComponent,
-    SignInFormComponent,
-    ValidFormIconPipe,
-    SuccessfulSignUpComponent
-  ],
-  imports: [
-    SharedModule,
-    LoginRoutingModule,
-    WidgetsModule,
-    MatSidenavModule,
-  ]
+    declarations: [
+        LoginFormComponent,
+        LoginAppComponent,
+        SignUpFormComponent,
+        SignInFormComponent,
+        ValidFormIconPipe,
+        SuccessfulSignUpComponent
+    ],
+    exports: [
+        ValidFormIconPipe
+    ],
+    imports: [
+        SharedModule,
+        LoginRoutingModule,
+        WidgetsModule,
+        MatSidenavModule,
+    ]
 })
 export class LoginModule { }

@@ -12,8 +12,9 @@ export class SidenavComponent implements OnInit {
 
   menuItems: MenuItem[] = [
     {title: 'Szukaj stacji', iconName: 'search', href: ['/main', 'petrol-list']},
-    {title: 'Ustawienia', iconName: 'settings', href: ['/settings']},
-    {title: 'Wylogój się', iconName: 'exit_to_app', href: ['/auth'], procedure: () => this.authService.logout()},
+    {title: 'Statystyki', iconName: 'signal_cellular_alt', href: ['/statistics']},
+    {title: 'Dodaj stacje', iconName: 'plus_one', href: ['/main', 'create']},
+    {title: 'Wyloguj się', iconName: 'exit_to_app', href: ['/auth'], procedure: () => this.authService.logout()},
   ];
 
   constructor(private router: Router, private authService: AuthService) { }

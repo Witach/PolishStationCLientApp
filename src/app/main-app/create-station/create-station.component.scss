@@ -1,0 +1,222 @@
+@import "../../../common";
+
+
+.main-container {
+  @include on-mobile-prop(width, 50%, 100%);
+  margin: 20px auto 0 auto;
+  @include on-mobile {
+    margin: 0 auto 0 auto;
+  }
+
+  .mat-card .mat-card-header .mat-card-header-text {
+    width: 100% !important;
+    display: block;
+  }
+}
+
+h2 {
+  @include header-text;
+  margin: 0;
+  font-size: 2.5rem;
+  @include on-mobile-prop(flex-grow, 1, 0);
+}
+
+.side-info {
+  @include small-text;
+  margin: 0;
+  opacity: .5;
+}
+
+.name-container {
+  @include full-width;
+  @include flex-list(auto);
+  justify-content: space-between;
+
+  > table {
+    flex: 0 1 auto;
+    @include small-text;
+  }
+}
+
+.mat-card {
+  padding: 20px;
+}
+
+.info-container {
+  width: 90%;
+  @include centralized;
+
+  .header-container {
+    @include full-width;
+    .mat-card-title {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+  }
+}
+.line-separator {
+  @include full-width;
+  height: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+#map {
+  width: 90%;
+  margin: 20px auto;
+  height: 500px;
+}
+.name-container table .small-text{
+  @include small-text;
+  opacity: 0.5;
+}
+
+.main-container {
+  margin-bottom: 20px;
+}
+.facility-container {
+  @include flex-list(auto);
+  margin-top: 20px;
+  @include on-mobile {
+    @include flex-list(auto);
+    flex-wrap: wrap;
+  }
+}
+
+.fuel-types-container {
+  @include flex-list(15%);
+  @include on-mobile {
+    @include flex-list(auto);
+    > * {
+      margin: 0 5px;
+    }
+  }
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.fuel-price-container {
+  @include flex-list(auto);
+  flex-direction: column;
+  margin-top: 20px;
+  .input-section {
+    @include flex-list(auto);
+    @include on-mobile {
+      flex-direction: column;
+      > *  {
+        margin: 10px 0;
+        width: 75%;
+      }
+    }
+  }
+}
+.fuel-price-elem {
+  display: inline-block;
+  background: map-get($polish-station-theme-primary, 600);
+  padding: 7px;
+  border-radius: 10px;
+  width: auto;
+  text-align: center;
+  text-transform: unset;
+  font-weight: bold;
+  color: white;
+  @include default-box-shadow;
+  margin: 15px 0 15px 20px;
+}
+.date-label {
+  font-weight: 500;
+  opacity: 0.5;
+}
+
+.rate {
+  font-size: 3rem;
+}
+
+.rate-icon {
+  vertical-align: bottom;
+  mat-icon {
+    font-size: 3rem;
+    color: map-get($polish-station-theme-primary, 600);
+  }
+}
+.red-grade {
+  color: map-get($polish-station-theme-primary, 600);
+}
+.grade-to-click {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 0 5px;
+}
+.comment-wrapper {
+  @include flex-list(50%);
+  align-items: center;
+  > * {
+    text-align: center;
+  }
+  margin-top: 20px;
+  @include on-mobile {
+    @include flex-list(100%);
+    flex-direction: column;
+  }
+}
+.input-section {
+  margin-top: 20px;
+}
+
+.approval-button {
+  margin-top: 20px;
+}
+
+.fuel-type-selector {
+  margin-left: 20px;
+  width: 200px;
+}
+
+.price-approval-button {
+  margin-left: 20px;
+}
+
+.input-section {
+  @include flex-list(auto);
+  align-items: center;
+}
+::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .mat-card {
+    @include on-mobile {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+    }
+  }
+}
+
+.grade-button {
+  text-align: right;
+}
+.rate-sepparator {
+  padding-left: 30px;
+  padding-right: 15px;
+}
+
+.address-input-container {
+  @include flex-list(auto);
+  flex-direction: column;
+  > * {
+    @include on-mobile-prop(width,50%, 100%);
+    margin-top: 20px;
+  }
+}
+
+.submit-button-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > * {
+    flex: 1 1 auto;
+  }
+}
+
+mat-hint {
+  padding-top: 20px;
+}

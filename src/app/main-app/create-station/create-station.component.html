@@ -1,0 +1,130 @@
+<div class="main-container">
+  <div class="mat-card">
+    <div class="mat-card-header">
+      <form [formGroup]="newStation" (ngSubmit)="onSubmit()">
+        <div class="mat-card-title">
+          <div class="name-container">
+            <h2>New gas station</h2>
+          </div>
+        </div>
+        <div class="info-container">
+          <div class="header-container">
+            <h5 class="mat-card-title">Provide overal information</h5>
+            <div class="line-separator"></div>
+            <div class="address-input-container">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name"/>
+                <mat-icon matSuffix>{{newStation | validFormIcon: 'name' }}</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>DKN</mat-label>
+                <input matInput formControlName="dkn" type="tel"/>
+                <mat-icon matSuffix>{{newStation | validFormIcon: 'dkn' }}</mat-icon>
+                <mat-hint>DKN is an identity of several petrol station which is specified by law</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="info-container">
+          <div class="header-container">
+            <h5 class="mat-card-title">Provide address</h5>
+            <div class="line-separator"></div>
+            <div class="address-input-container">
+              <mat-form-field appearance="outline">
+                <mat-label>Town</mat-label>
+                <input matInput formControlName="town"/>
+                <mat-icon matSuffix>{{newStation | validFormIcon: 'town' }}</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Province</mat-label>
+                <select matNativeControl formControlName="province">
+                  <option value="Łódzkie">Łódzkie</option>
+                  <option value="Zachodnio pomorskie">Zachodnio pomorskie</option>
+                  <option value="Pomorskie">Pomorskie</option>
+                  <option value="Warmińsko-mazurskie">Warmińsko-mazurskie</option>
+                  <option value="Podlakskie">Podlakskie</option>
+                  <option value="Kujawsko-pomorskie">Kujawsko-pomorskie</option>
+                  <option value="Wielkopolskie">Wielkopolskie</option>
+                  <option value="Mazozwickie">Mazozwickie</option>
+                  <option value="Lubuskie">Lubuskie</option>
+                  <option value="Dolnośląskie">Dolnośląskie</option>
+                  <option value="Lubelskie">Lubelskie</option>
+                  <option value="Opolskie">Opolskie</option>
+                  <option value="Śląskie">Śląskie</option>
+                  <option value="Małopolskie">Małopolskie</option>
+                  <option value="Podkarpackie">Podkarpackie</option>
+                  <option value="Świętokrzyskie">Świętokrzyskie</option>
+                </select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Postal code</mat-label>
+                <input matInput formControlName="postalCode"/>
+                <mat-icon matSuffix>{{newStation | validFormIcon: 'postalCode' }}</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street"/>
+                <mat-icon matSuffix>{{newStation | validFormIcon: 'street' }}</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Street nr.</mat-label>
+                <input matInput formControlName="streetNumber"/>
+                <mat-icon matSuffix>{{newStation | validFormIcon: 'streetNumber' }}</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="info-container">
+          <div class="fuel-type-info">
+            <div class="header-container">
+              <h5 class="mat-card-title">Choose avaliable fuel types</h5>
+              <div class="line-separator"></div>
+              <section class="fuel-types-container">
+                <mat-checkbox *ngFor="let fuelTypeCheckbox of fuelTypesCheckboxes" class="fuel-type-checkbox"
+                              [(ngModel)]="fuelTypeCheckbox.checkboxValue"
+                              [ngModelOptions]="{standalone: true}">{{fuelTypeCheckbox.fuelType}}</mat-checkbox>
+              </section>
+            </div>
+          </div>
+          <div class="facilities-info">
+            <div class="header-container">
+              <h5 class="mat-card-title">Choose facilities</h5>
+              <div class="line-separator"></div>
+              <section class="facility-container">
+                <mat-checkbox [(ngModel)]="petrolStationInfo.isWCFree" [ngModelOptions]="{standalone: true}"
+                              matTooltip="Dostępna myjnia samochodowa" class="facility-checkbox">
+                  <mat-icon>local_car_wash</mat-icon>
+                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="petrolStationInfo.isWC" [ngModelOptions]="{standalone: true}"
+                              matTooltip="Dostępny kompresor do pompowania kół" class="facility-checkbox">Compressor
+                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="petrolStationInfo.isRestaurant" [ngModelOptions]="{standalone: true}"
+                              matTooltip="Na stacji można kupić hot dogi" class="facility-checkbox">Hot dogs
+                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="petrolStationInfo.isCompressor" [ngModelOptions]="{standalone: true}"
+                              matTooltip="Na stacji jest dostępna restauracja" class="facility-checkbox">
+                  <mat-icon>restaurant_menu</mat-icon>
+                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="petrolStationInfo.isCarWash" [ngModelOptions]="{standalone: true}"
+                              matTooltip="Na stacji dostępna jest toaleta" class="facility-checkbox">
+                  <mat-icon>wc</mat-icon>
+                </mat-checkbox>
+                <mat-checkbox [(ngModel)]="petrolStationInfo.isHotDogs" [ngModelOptions]="{standalone: true}"
+                              matTooltip="Toaleta jest darmowa" class="facility-checkbox">
+                  <mat-icon>wc</mat-icon>
+                  Free
+                </mat-checkbox>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="submit-button-container">
+          <button mat-raised-button color="primary" class="submit-button" type="submit"
+                  [disabled]="!newStation.valid">Create station
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
