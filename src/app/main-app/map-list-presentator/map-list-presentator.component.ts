@@ -16,6 +16,9 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
   petrolStationsProp: PetrolStationDto[] = [];
   isInitialized = new BehaviorSubject<boolean>(false);
 
+  @Input()
+  isLoading = false;
+
   @ViewChild('gmap')
   map: ElementRef;
   gmap: google.maps.Map;
@@ -62,11 +65,13 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.isLoading = true;
     console.log(this.petrolStationsProp);
     navigator.geolocation.getCurrentPosition( position => {
       this.gmap = this.googleMapInstance(position.coords.latitude, position.coords.longitude);
       this.storeService.userPosition = position;
       this.makeUserMarker(position.coords.latitude, position.coords.longitude);
+      this.isLoading = false;
       this.isInitialized.next(true);
     });
   }

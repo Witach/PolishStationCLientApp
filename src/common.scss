@@ -233,3 +233,10 @@ mat-toolbar {
 .hidden {
   display: none !important;
 }
+
+mat-spinner {
+  margin: 0;
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}

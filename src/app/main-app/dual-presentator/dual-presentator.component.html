@@ -2,7 +2,7 @@
 <div class="swipe-container-window">
   <div class="swipe-container" [ngStyle]="duelPresenterStyle">
     <div class="item-swipe" id="list-item">
-      <app-station-list [isLoading]="" (listItemClickedEvent)="onListItemClick($event)" [items]="items || []"></app-station-list>
+      <app-station-list [isLoading]="isLoading" (listItemClickedEvent)="onListItemClick($event)" [items]="items || []"></app-station-list>
     </div>
     <div class="item-swipe" id="map-item">
       <app-map-list-presentator [focusedPair]="focusedItemId" [items]="items || []"></app-map-list-presentator>

@@ -1,5 +1,5 @@
 <div class="main-container">
-  <div class="mat-card">
+  <div class="mat-card" [class.hidden]="isLoading">
     <div class="mat-card-header">
       <form [formGroup]="newStation" (ngSubmit)="onSubmit()">
         <div class="mat-card-title">
@@ -115,6 +115,10 @@
                   <mat-icon>wc</mat-icon>
                   Free
                 </mat-checkbox>
+                <mat-checkbox [(ngModel)]="petrolStationInfo" [ngModelOptions]="{standalone: true}"
+                              matTooltip="Samoobsługowa stacja" class="facility-checkbox">
+                  Self-service
+                </mat-checkbox>
               </section>
             </div>
           </div>
@@ -127,4 +131,5 @@
       </form>
     </div>
   </div>
+  <mat-spinner [class.hidden]="!isLoading"></mat-spinner>
 </div>

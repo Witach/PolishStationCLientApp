@@ -8,6 +8,6 @@ export class SnackBarService {
 
   openSnackBar(message: any): void {
     console.log(message);
-    this.matSnackBar.open(message.error.message, null, {duration: 1000, panelClass: ['polish-station-snack-bar']});
+    this.matSnackBar.open(message?.error ? message.error.message : message, null, {duration: 1000, panelClass: ['polish-station-snack-bar']});
   }
 }

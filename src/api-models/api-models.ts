@@ -19,6 +19,7 @@ export interface PetrolStationStats {
   isRestaurant: boolean;
   isCompressor: boolean;
   isCarWash: boolean;
+  isSelfService: boolean;
 }
 
 export interface LocalizationDto {
@@ -116,6 +117,7 @@ export interface PetrolStationPostDto {
   isCompressor: boolean;
   isCarWash: boolean;
   isHotDogs: boolean;
+  isSelfService: boolean;
 }
 
 export interface LastFuelPriceDTO {

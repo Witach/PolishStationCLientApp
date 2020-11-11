@@ -40,6 +40,7 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   fuelTypeCopy = [];
   private stationCopy: PetrolStationDto;
+  isLoading = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private petrolStationService: PetrolStationService,
@@ -149,18 +150,20 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
       isRestaurant: this.station.petrolStationStats.isRestaurant,
       isCompressor: this.station.petrolStationStats.isCompressor,
       isCarWash: this.station.petrolStationStats.isCarWash,
-      isHotDogs: this.station.petrolStationStats.isHotDogs
+      isHotDogs: this.station.petrolStationStats.isHotDogs,
+      isSelfService: this.station.petrolStationStats.isSelfService
     };
   }
 
   initComponent(): void {
+    this.isLoading = true;
     this.initSub = this.activatedRoute.paramMap.pipe(
       switchMap(param => this.petrolStationService.getPetrolStationById(Number(param.get('id')))),
       tap(this.initMapFun),
       tap(this.getFuelStationInfo),
       tap(this.prepareFuelTypeCheckboxes),
       tap(this.prepareOpinion)
-    ).subscribe();
+    ).subscribe(() => this.isLoading = false);
   }
 
   initMapFun = () =>
@@ -205,6 +208,7 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
     this.opinionService.geUsersOpinions(user.email)
       .subscribe(this.opinionPrepareClosure(user));
   }
+
 
   private checkForFacilitiesChanges(): boolean {
     return Object.keys(this.station.petrolStationStats).some(

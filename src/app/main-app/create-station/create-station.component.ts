@@ -4,11 +4,10 @@ import {FuelTypeService} from '../../service/fuel-type.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OpinionService} from '../../service/opinion.service';
 import {StoreService} from '../../service/store.service';
-import {AuthService} from '../../service/auth.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SnackBarService} from '../../widget/snack-bar.service';
-import {fieldsDefs} from "../../fields-definitions/fields-definitions";
-import {PetrolStationDto, PetrolStationPostDto} from "../../../api-models/api-models";
+import {fieldsDefs} from '../../fields-definitions/fields-definitions';
+import {PetrolStationDto, PetrolStationPostDto} from '../../../api-models/api-models';
 
 @Component({
   selector: 'app-create-station',
@@ -21,6 +20,8 @@ export class CreateStationComponent implements OnInit {
 
   newStation: FormGroup;
 
+  isLoading = false;
+
   fuelTypesCheckboxes: { fuelType: string, checkboxValue: boolean }[] = [];
   petrolStationInfo = {
     isWCFree: false,
@@ -29,6 +30,7 @@ export class CreateStationComponent implements OnInit {
     isCompressor: false,
     isCarWash: false,
     isHotDogs: false,
+    isSelfService: false,
   };
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -42,6 +44,7 @@ export class CreateStationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     navigator.geolocation.getCurrentPosition(position => {
       this.userPosition = position;
     });
@@ -58,12 +61,20 @@ export class CreateStationComponent implements OnInit {
     this.fuelTypesCheckboxes = fuelTypes.map(fuelType => {
       return {fuelType, checkboxValue: false};
     });
+    this.isLoading = false;
   }
 
   onSubmit() {
+    this.isLoading = true;
     if (this.newStation.valid) {
       this.petrolStationService.createPetrolStation(this.createPetrolStationDTO())
-        .subscribe(dto => this.router.navigate(['/main', 'petrol-item', dto.id]), error => this.snackBar.openSnackBar(error.message));
+        .subscribe(dto => {
+          this.router.navigate(['/main', 'petrol-item', dto.id]);
+          this.isLoading = false;
+        }, error => {
+          this.snackBar.openSnackBar(error.message);
+          this.isLoading = false;
+        });
     }
 
   }
@@ -85,7 +96,8 @@ export class CreateStationComponent implements OnInit {
       isRestaurant: this.petrolStationInfo.isRestaurant,
       isCompressor: this.petrolStationInfo.isCompressor,
       isCarWash: this.petrolStationInfo.isCarWash,
-      isHotDogs: this.petrolStationInfo.isHotDogs
+      isHotDogs: this.petrolStationInfo.isHotDogs,
+      isSelfService: this.petrolStationInfo.isSelfService
     };
   }
 }

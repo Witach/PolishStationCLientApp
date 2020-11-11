@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PetrolStationService} from "../../service/petrol-station.service";
-import {FuelTypeService} from "../../service/fuel-type.service";
-import {OpinionService} from "../../service/opinion.service";
-import {StoreService} from "../../service/store.service";
-import {SnackBarService} from "../../widget/snack-bar.service";
-import {fieldsDefs} from "../../fields-definitions/fields-definitions";
-import {PetrolStationDto, PetrolStationPostDto} from "../../../api-models/api-models";
-import {map, switchMap, tap} from "rxjs/operators";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PetrolStationService} from '../../service/petrol-station.service';
+import {FuelTypeService} from '../../service/fuel-type.service';
+import {OpinionService} from '../../service/opinion.service';
+import {StoreService} from '../../service/store.service';
+import {SnackBarService} from '../../widget/snack-bar.service';
+import {fieldsDefs} from '../../fields-definitions/fields-definitions';
+import {PetrolStationDto, PetrolStationPostDto} from '../../../api-models/api-models';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-petrol-staion',
@@ -19,6 +19,7 @@ export class EditPetrolStaionComponent implements OnInit {
 
   newStation: FormGroup;
   fuelTypeCopy = [];
+  isLoading = false;
 
   fuelTypesCheckboxes: { fuelType: string, checkboxValue: boolean }[] = [];
   petrolStationInfo = {
@@ -28,6 +29,7 @@ export class EditPetrolStaionComponent implements OnInit {
     isCompressor: false,
     isCarWash: false,
     isHotDogs: false,
+    isSelfService: false,
   };
   private station: PetrolStationDto;
 
@@ -42,6 +44,7 @@ export class EditPetrolStaionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     const {town, street, streetNumber, name, dkn, postalCode, province} = fieldsDefs;
     this.newStation = this.formsBuilder.group({town, street, streetNumber,  name, dkn, postalCode, province});
     this.activatedRoute.paramMap.pipe(
@@ -62,6 +65,7 @@ export class EditPetrolStaionComponent implements OnInit {
     this.newStation.controls.dkn.setValue(station.dkn);
     this.newStation.controls.postalCode.setValue(station.localization.postalCode);
     this.newStation.controls.province.setValue(station.localization.province);
+    this.isLoading = false;
   }
 
   prepareFacilities = station => {
@@ -72,6 +76,7 @@ export class EditPetrolStaionComponent implements OnInit {
       isCompressor: station.petrolStationStats.isCompressor,
       isCarWash: station.petrolStationStats.isCarWash,
       isHotDogs: station.petrolStationStats.isHotDogs,
+      isSelfService: station.petrolStationStats.isSelfService,
     };
   }
 
@@ -88,10 +93,15 @@ export class EditPetrolStaionComponent implements OnInit {
     this.fuelTypeCopy = JSON.parse(JSON.stringify(this.fuelTypesCheckboxes));
   }
 
+
   onSubmit() {
+    this.isLoading = true;
     if (this.newStation.valid) {
       this.petrolStationService.updatePetrolStation(this.station.id, this.createPetrolStationDTO())
-        .subscribe(_ => this.snackBar.openSnackBar('Success :)'));
+        .subscribe(_ => {
+          this.snackBar.openSnackBar('Success :)');
+          this.isLoading = false;
+        });
     }
 
   }
@@ -113,7 +123,8 @@ export class EditPetrolStaionComponent implements OnInit {
       isRestaurant: this.petrolStationInfo.isRestaurant,
       isCompressor: this.petrolStationInfo.isCompressor,
       isCarWash: this.petrolStationInfo.isCarWash,
-      isHotDogs: this.petrolStationInfo.isHotDogs
+      isHotDogs: this.petrolStationInfo.isHotDogs,
+      isSelfService: this.petrolStationInfo.isSelfService,
     };
   }
 }

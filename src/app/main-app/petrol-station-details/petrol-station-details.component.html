@@ -1,5 +1,5 @@
 <div class="main-container">
-  <div  class="mat-card" >
+  <div  class="mat-card" [class.hidden]="isLoading">
     <div class="mat-card-header" >
       <div class="mat-card-title">
          <div class="name-container">
@@ -83,6 +83,7 @@
               <mat-checkbox matTooltip="Na stacji jest dostępna restauracja" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isRestaurant"><mat-icon>restaurant_menu</mat-icon></mat-checkbox>
               <mat-checkbox matTooltip="Na stacji dostępna jest toaleta" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isWC"><mat-icon>wc</mat-icon></mat-checkbox>
               <mat-checkbox matTooltip="Toaleta jest darmowa" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isWCFree"><mat-icon>wc</mat-icon> Free</mat-checkbox>
+              <mat-checkbox matTooltip="Stacja samoobsługowa" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isSelfService">Self service</mat-checkbox>
             </section>
             <button class="approval-button" mat-raised-button color="primary" (click)="approveFuelTypeChanges()">Approve changes</button>
           </div>
@@ -90,4 +91,5 @@
       </div>
     </div>
   </div>
+  <mat-spinner [class.hidden]="!isLoading"></mat-spinner>
 </div>
