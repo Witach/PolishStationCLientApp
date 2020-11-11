@@ -9,6 +9,7 @@ import {ValidFormIconPipe} from './service/form-icon.pipe';
 import {SuccessfulSignUpComponent} from './successful-sign-up/successful-sign-up.component';
 import {WidgetsModule} from '../widget/widgets.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
         LoginRoutingModule,
         WidgetsModule,
         MatSidenavModule,
+        MatProgressSpinnerModule,
     ]
 })
 export class LoginModule { }

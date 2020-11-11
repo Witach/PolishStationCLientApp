@@ -13,6 +13,7 @@ import {SnackBarService} from '../../widget/snack-bar.service';
 export class SignUpFormComponent implements OnInit {
 
   registringUser: FormGroup;
+  isLoading = false;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: SnackBarService) { }
 
@@ -26,15 +27,22 @@ export class SignUpFormComponent implements OnInit {
     const repeatedPassword = control.get('repeatPassword');
     return repeatedPassword === password ? {repeatedCorrectly: true} : null;
   }
-
+  
   onSubmit() {
     if (this.registringUser.valid) {
+      this.isLoading = true;
       const email = this.registringUser.get('email').value;
       const password = this.registringUser.get('password').value;
       const username = this.registringUser.get('username').value;
       this.authService.register({email, password, username}).subscribe(
-        () => this.router.navigate(['/auth', 'successful-registration']),
-        err => this.snackBar.openSnackBar(err)
+        () => {
+          this.isLoading = false;
+          this.router.navigate(['/auth', 'successful-registration']);
+          },
+        err => {
+          this.isLoading = false;
+          this.snackBar.openSnackBar(err);
+        }
       );
     }
   }

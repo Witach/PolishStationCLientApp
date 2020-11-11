@@ -14,6 +14,7 @@ import {first, tap} from 'rxjs/operators';
 export class SignInFormComponent implements OnInit {
 
   loggingUser: FormGroup;
+  isLoading = false;
 
   constructor(private formsBuilder: FormBuilder,
               private authService: AuthService,
@@ -31,14 +32,21 @@ export class SignInFormComponent implements OnInit {
 
   onSubmit() {
     if (this.loggingUser.valid) {
+      this.isLoading = true;
       this.authService.login(this.loggingUser.get('email').value, this.loggingUser.get('password').value)
         .pipe(
           first(),
           tap(user => this.authService.updateUserData(user))
         )
         .subscribe(
-          () => this.router.navigate(['/main', 'dashboard']),
-          err => this.snackBar.openSnackBar(err)
+          () => {
+            this.isLoading = false;
+            this.router.navigate(['/main', 'dashboard']);
+          },
+          err => {
+            this.isLoading = false;
+            this.snackBar.openSnackBar(err);
+          }
         );
     }
   }

@@ -32,6 +32,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import { CreateStationComponent } from './create-station/create-station.component';
 import {LoginModule} from "../login/login.module";
 import { EditPetrolStaionComponent } from './edit-petrol-staion/edit-petrol-staion.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { EditPetrolStaionComponent } from './edit-petrol-staion/edit-petrol-stai
     MatCheckboxModule,
     MatTooltipModule,
     LoginModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class MainAppModule { }

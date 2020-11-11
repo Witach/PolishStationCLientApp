@@ -1,13 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatDrawer} from '@angular/material/sidenav';
 import {DualToggleEventService} from "../dual-presentator-toggle/dual-toggle-event-service";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {PetrolStationService} from "../../service/petrol-station.service";
 import {PetrolStationDto} from "../../../api-models/api-models";
-import {petrolStations} from "../../../stub/petrols-stations";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {BreakpointState} from "@angular/cdk/layout/breakpoints-observer";
-import {HttpParams} from "@angular/common/http";
 import {StoreService} from "../../service/store.service";
 
 @Component({
@@ -33,6 +30,8 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   focusedItemId: number;
   isBigScreened: boolean;
 
+  isLoading = true;
+
   constructor(private dualToggleEvnetService: DualToggleEventService,
               private petrolStationService: PetrolStationService,
               private breakpointObserver: BreakpointObserver,
@@ -49,16 +48,23 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
     navigator.geolocation.getCurrentPosition( position => {
       this.storeService.userPosition = position;
       this.petrolStationService.getPetrolStations({lat: position.coords.latitude, long: position.coords.longitude, maxDistance: 10}).subscribe(
-        (stations) => this.items = stations
+        (stations) => {
+          this.items = stations;
+          this.isLoading = false;
+        }
       );
     });
   }
 
   onFilterButtonClick(event: any): void {
+    this.isLoading = true;
     const position = this.storeService.userPosition;
     const params = {lat: position.coords.latitude, long: position.coords.longitude, ...event};
     this.petrolStationService.getPetrolStations(params).subscribe(
-      (stations) => this.items = stations
+      (stations) => {
+        this.isLoading = false;
+        this.items = stations;
+      }
     );
   }
 

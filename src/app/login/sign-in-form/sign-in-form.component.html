@@ -1,5 +1,5 @@
 <app-login-form headerText="Sign In">
-  <form [formGroup]="loggingUser" (ngSubmit)="onSubmit()">
+  <form [class.hidden]="isLoading" [formGroup]="loggingUser" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" >
       <mat-label>Email</mat-label>
       <input matInput formControlName="email"/>
@@ -14,4 +14,6 @@
     </mat-form-field>
     <button mat-raised-button color="primary" class="submit-button" type="submit" [disabled]="!loggingUser.valid">Sign in</button>
   </form>
+  <mat-spinner [class.hidden]="!isLoading"></mat-spinner>
 </app-login-form>
+

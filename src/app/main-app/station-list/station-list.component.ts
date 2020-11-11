@@ -14,6 +14,9 @@ export class StationListComponent implements OnInit {
   @Output()
   listItemClickedEvent = new EventEmitter<PetrolStationDto>();
 
+  @Input()
+  isLoading = false;
+
   constructor() { }
 
   ngOnInit(): void {
