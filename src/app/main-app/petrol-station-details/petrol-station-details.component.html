@@ -1,6 +1,6 @@
 <div class="main-container">
-  <div  class="mat-card" [class.hidden]="isLoading">
-    <div class="mat-card-header" >
+  <div  class="mat-card">
+    <div class="mat-card-header">
       <div class="mat-card-title">
          <div class="name-container">
            <h2>{{station?.name || ''}}<ng-container><button [routerLink]="['/main', 'petrol-item', this?.station?.id, 'edit']" mat-mini-fab class="edit-button" color="primary"><mat-icon>edit</mat-icon></button></ng-container></h2>
@@ -91,5 +91,4 @@
       </div>
     </div>
   </div>
-  <mat-spinner [class.hidden]="!isLoading"></mat-spinner>
 </div>
