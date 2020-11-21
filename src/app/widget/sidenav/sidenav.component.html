@@ -2,6 +2,7 @@
   <mat-list-option color="primary"
                    *ngFor="let item of menuItems"
                    [value]="item.href"
+                   [disabled]="item.isDisabled"
                    (click)="onMenuItemClick(item.href, item.procedure)">
     <span class="menu-item" [routerLink]="item.href">
       <mat-icon>{{item.iconName}}</mat-icon>

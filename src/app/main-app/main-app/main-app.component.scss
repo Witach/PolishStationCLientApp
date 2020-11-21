@@ -6,3 +6,10 @@
   top: 5px;
   z-index: 3;
 }
+::ng-deep {
+  mat-list-option.mat-list-item-disabled {
+     * {
+       color: gray !important;
+     }
+  }
+}

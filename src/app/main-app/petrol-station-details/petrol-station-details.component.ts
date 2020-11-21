@@ -9,6 +9,7 @@ import {FuelTypeService} from '../../service/fuel-type.service';
 import {OpinionService} from '../../service/opinion.service';
 import {StoreService} from '../../service/store.service';
 import {AuthService} from '../../service/auth.service';
+import {POINTS_PREVILIGES} from '../../../api-models/points-previliges';
 
 @Component({
   selector: 'app-petrol-station-details',
@@ -29,6 +30,8 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   clickedGradeId = 0;
 
+  pointsPreviligies = POINTS_PREVILIGES;
+
   isClicked = false;
 
   fuelTypesApprovedFromServer: FuelTypeDto[];
@@ -37,6 +40,8 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
 
   fuelPrice: number;
   selectedFuelType: string;
+
+  userPoints: number;
 
   fuelTypeCopy = [];
   private stationCopy: PetrolStationDto;
@@ -159,11 +164,16 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     this.initSub = this.activatedRoute.paramMap.pipe(
       switchMap(param => this.petrolStationService.getPetrolStationById(Number(param.get('id')))),
+      tap(() => this.loadPreviliges()),
       tap(this.initMapFun),
       tap(this.getFuelStationInfo),
       tap(this.prepareFuelTypeCheckboxes),
       tap(this.prepareOpinion)
     ).subscribe(() => this.isLoading = false);
+  }
+
+  loadPreviliges = () => {
+    this.authService.getUserData().subscribe(appUser => this.userPoints = appUser.amountOfPoints);
   }
 
   initMapFun = () =>

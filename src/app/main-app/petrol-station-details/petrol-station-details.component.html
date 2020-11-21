@@ -3,7 +3,7 @@
     <div class="mat-card-header">
       <div class="mat-card-title">
          <div class="name-container">
-           <h2>{{station?.name || ''}}<ng-container><button [routerLink]="['/main', 'petrol-item', this?.station?.id, 'edit']" mat-mini-fab class="edit-button" color="primary"><mat-icon>edit</mat-icon></button></ng-container></h2>
+           <h2>{{station?.name || ''}}<ng-container><button [disabled]="userPoints < pointsPreviligies.verified"  [routerLink]="['/main', 'petrol-item', this?.station?.id, 'edit']" mat-mini-fab class="edit-button" color="primary"><mat-icon>edit</mat-icon></button></ng-container></h2>
            <table>
              <tr>
                <td class="small-text">Lat: </td>
@@ -27,7 +27,7 @@
             <section class="fuel-types-container">
               <mat-checkbox *ngFor="let fuelTypeCheckbox of fuelTypesCheckboxes" class="fuel-type-checkbox" [(ngModel)]="fuelTypeCheckbox.checkboxValue">{{fuelTypeCheckbox.fuelType}}</mat-checkbox>
             </section>
-            <button class="approval-button" mat-raised-button color="primary" (click)="approveFuelTypeChanges()">Approve changes</button>
+            <button [disabled]="userPoints < pointsPreviligies.newUser" class="approval-button" mat-raised-button color="primary" (click)="approveFuelTypeChanges()">Approve changes</button>
           </div>
         </div>
         <div class="price-info">
@@ -85,7 +85,7 @@
               <mat-checkbox matTooltip="Toaleta jest darmowa" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isWCFree"><mat-icon>wc</mat-icon> Free</mat-checkbox>
               <mat-checkbox matTooltip="Stacja samoobsługowa" class="facility-checkbox" [(ngModel)]="station?.petrolStationStats.isSelfService">Self service</mat-checkbox>
             </section>
-            <button class="approval-button" mat-raised-button color="primary" (click)="approveFuelTypeChanges()">Approve changes</button>
+            <button [disabled]="userPoints < pointsPreviligies.enthusiast" class="approval-button" mat-raised-button color="primary" (click)="approveFuelTypeChanges()">Approve changes</button>
           </div>
         </div>
       </div>

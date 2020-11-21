@@ -7,6 +7,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {SnackBarService} from './snack-bar.service';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -17,7 +18,8 @@ import {SnackBarService} from './snack-bar.service';
     imports: [
         SharedModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        MatTooltipModule
     ]
 })
 export class WidgetsModule { }

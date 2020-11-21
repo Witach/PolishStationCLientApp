@@ -39,6 +39,7 @@ export interface AppUserDTO {
   id: number;
   isVerified: boolean;
   username: string;
+  amountOfPoints: number,
 }
 
 export interface AppUserRoleDto {
