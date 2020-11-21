@@ -10,6 +10,7 @@ import {OpinionService} from '../../service/opinion.service';
 import {StoreService} from '../../service/store.service';
 import {AuthService} from '../../service/auth.service';
 import {POINTS_PREVILIGES} from '../../../api-models/points-previliges';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-petrol-station-details',
@@ -52,7 +53,8 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
               private fuelTypeService: FuelTypeService,
               private opinionService: OpinionService,
               private storeService: StoreService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private matSnackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -244,5 +246,9 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
   stringifyDateHumanReadable(date: string) {
     const dateObj = new Date(date);
     return dateObj.getDay() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear() + 'r';
+  }
+
+  showPreviligeBar() {
+    this.matSnackBar.open("message?.error ? message.error.message : message", null, {duration: 1000, panelClass: ['polish-station-snack-bar']});
   }
 }

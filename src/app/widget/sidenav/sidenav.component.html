@@ -1,12 +1,13 @@
 <mat-selection-list [multiple]="false">
-  <mat-list-option color="primary"
-                   *ngFor="let item of menuItems"
-                   [value]="item.href"
-                   [disabled]="item.isDisabled"
-                   (click)="onMenuItemClick(item.href, item.procedure)">
-    <span class="menu-item" [routerLink]="item.href">
-      <mat-icon>{{item.iconName}}</mat-icon>
-      <span>{{item.title}}</span>
-    </span>
-  </mat-list-option>
+  <div *ngFor="let item of menuItems" [matTooltip]="'You\'re ' + (this.userPoints - this.userPreviliges.master) + ' points short'" [matTooltipDisabled]="!item.isDisabled">
+    <mat-list-option color="primary"
+                     [value]="item.href"
+                     [disabled]="item.isDisabled"
+                     (click)="onMenuItemClick(item.href, item.procedure)">
+      <span class="menu-item" [routerLink]="item.href">
+        <mat-icon>{{item.iconName}}</mat-icon>
+        <span>{{item.title}}</span>
+      </span>
+    </mat-list-option>
+  </div>
 </mat-selection-list>
