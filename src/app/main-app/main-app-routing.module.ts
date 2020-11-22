@@ -6,8 +6,9 @@ import {StationItemComponent} from './station-item/station-item.component';
 import {AuthGuard} from '../service/auth.guard';
 import {DualPresentatorComponent} from './dual-presentator/dual-presentator.component';
 import {PetrolStationDetailsComponent} from './petrol-station-details/petrol-station-details.component';
-import {CreateStationComponent} from "./create-station/create-station.component";
-import {EditPetrolStaionComponent} from "./edit-petrol-staion/edit-petrol-staion.component";
+import {CreateStationComponent} from './create-station/create-station.component';
+import {EditPetrolStaionComponent} from './edit-petrol-staion/edit-petrol-staion.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'main', component: MainAppComponent, canActivate: [AuthGuard],
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'petrol-item/:id', component: PetrolStationDetailsComponent },
       { path: 'petrol-item/:id/edit', component: EditPetrolStaionComponent },
       { path: 'create', component: CreateStationComponent },
+      { path: 'user-profile', component: UserProfileComponent },
     ] },
 ];
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppUserDTO, AppUserPostDto, AUthResponse} from '../../api-models/api-models';
+import {AppUserDTO, AppUserPostDto, AppUserStatsDTO, AUthResponse} from '../../api-models/api-models';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
@@ -41,18 +41,18 @@ export class AuthService {
         first(),
         tap((appUser) => this.loadUserData(appUser)),
         map(user => {
-        this.storageService.saveUserInStorage(user);
-        this.currentUserSubject.next(user);
-        return user;
-      }));
+          this.storageService.saveUserInStorage(user);
+          this.currentUserSubject.next(user);
+          return user;
+        }));
   }
 
   loadUserData(appUserRequest: AppUserDTO) {
-   this.http.get<AppUserDTO>(environment.apiUrl + '/app-user/' + appUserRequest.id).subscribe(appUser => this.trueUser = appUser);
+    this.http.get<AppUserDTO>(environment.apiUrl + '/app-user/' + appUserRequest.id).subscribe(appUser => this.trueUser = appUser);
   }
 
-  getUserData(): Observable<AppUserDTO>{
-   return this.currentUserSubject.pipe(
+  getUserData(): Observable<AppUserDTO> {
+    return this.currentUserSubject.pipe(
       switchMap(appUser => {
         return this.http.get<AppUserDTO>(environment.apiUrl + '/app-user/' + appUser.id);
       })
@@ -64,4 +64,11 @@ export class AuthService {
     this.storageService.removeUserFromStorage();
   }
 
+  updateUser(id: number, appUserPost: AppUserPostDto): Observable<void> {
+    return this.http.patch<void>(environment.apiUrl + '/app-user/' + id, appUserPost);
+  }
+
+  getUserStats(id: number) {
+    return this.http.get<AppUserStatsDTO>(environment.apiUrl + '/app-user/' + id + '/stats');
+  }
 }

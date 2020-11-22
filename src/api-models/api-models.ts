@@ -134,3 +134,11 @@ export interface AUthResponse {
 export interface Page<T> {
   content: T[];
 }
+
+export interface AppUserStatsDTO {
+  amountOfCreatedStations: number;
+  amountOfPoints: number;
+  amountOfAddedFuelTypes: number;
+  amountOfOpinions: number;
+  amountOfEditedInformations: number;
+}
