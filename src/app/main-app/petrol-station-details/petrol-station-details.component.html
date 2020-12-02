@@ -55,6 +55,7 @@
                 </mat-form-field>
                 <button class="price-approval-button" mat-raised-button color="primary" (click)="onAddPriceButtonCLicked()">Add price</button>
               </div>
+              <span class="details-link" [routerLink]="['/main', 'stats', station?.id]">Price statistics ></span>
             </section>
           </div>
         </div>

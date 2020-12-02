@@ -2,7 +2,7 @@
 
 
 .main-container {
-  @include on-mobile-prop(width, 50%, 100%);
+  @include on-mobile-prop(width, 75%, 100%);
   margin: 20px auto 0 auto;
   @include on-mobile {
     margin: 0 auto 0 auto;
@@ -11,6 +11,9 @@
   .mat-card .mat-card-header .mat-card-header-text {
     width: 100% !important;
     display: block;
+  }
+  .mat-card .mat-card-header {
+    @include on-mobile-prop(overflow-x, visible, scroll);
   }
 }
 
@@ -189,14 +192,7 @@ h2 {
     }
   }
 }
-.details-link {
-  text-align: right;
-  margin-top: 30px;
-  color: map-get($polish-station-theme-primary, 600);
-  font-weight: 600;
-  cursor: pointer;
 
-}
 .grade-button {
   text-align: right;
 }
@@ -205,16 +201,25 @@ h2 {
   padding-right: 15px;
 }
 
-.black-header {
-  color: black;
+.address-input-container {
+  @include flex-list(auto);
+  flex-direction: column;
+  > * {
+    @include on-mobile-prop(width,50%, 100%);
+    margin-top: 20px;
+  }
 }
 
-.edit-button {
-  margin-left: 10px;
-  width: 30px;
-  height: 30px;
-  mat-icon {
-    font-size: 1.2rem;
-    margin-top:  -8px
+.submit-button-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > * {
+    flex: 1 1 auto;
   }
+}
+
+mat-hint {
+  padding-top: 20px;
 }

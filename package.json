@@ -30,6 +30,7 @@
     "@fortawesome/angular-fontawesome": "^0.7.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@swimlane/ngx-charts": "^16.0.0",
     "rxjs": "~6.5.4",
     "snazzy-info-window": "^1.1.0",
     "tslib": "^1.10.0",

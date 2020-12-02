@@ -34,6 +34,8 @@ import {LoginModule} from "../login/login.module";
 import { EditPetrolStaionComponent } from './edit-petrol-staion/edit-petrol-staion.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PolishStationStatsComponent } from './polish-station-stats/polish-station-stats.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 
 @NgModule({
@@ -52,6 +54,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     CreateStationComponent,
     EditPetrolStaionComponent,
     UserProfileComponent,
+    PolishStationStatsComponent,
   ],
   providers: [
     DualToggleEventService,
@@ -75,6 +78,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatTooltipModule,
     LoginModule,
     MatProgressSpinnerModule,
+    NgxChartsModule,
   ]
 })
 export class MainAppModule { }

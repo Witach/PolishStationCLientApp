@@ -142,3 +142,23 @@ export interface AppUserStatsDTO {
   amountOfOpinions: number;
   amountOfEditedInformations: number;
 }
+
+export interface FuelPriceStats {
+  date: string;
+  price: number;
+}
+
+export interface PlaceDTO {
+  placeNumber: number;
+  petrolStation: PetrolStationDto;
+}
+
+export interface StatsDTO {
+  day: string;
+  opinionRank: PetrolStationDto[];
+  fuelTypePriceRank: {[key: string]: PetrolStationDto};
+}
+
+export interface FuelStats {
+  [key: string]: FuelPriceStats[];
+}
