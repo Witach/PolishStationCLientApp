@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StatsService} from '../../service/stats.service';
-import {FuelPriceStats, FuelStats} from '../../../api-models/api-models';
+import {DetailsStatsDTO, FuelPriceStats, FuelStats} from '../../../api-models/api-models';
 
 @Component({
   selector: 'app-polish-station-stats',
@@ -10,6 +10,7 @@ import {FuelPriceStats, FuelStats} from '../../../api-models/api-models';
 export class PolishStationStatsComponent implements OnInit {
 
   multi: any[];
+  maxValues: DetailsStatsDTO = {};
   view: any[] = [window.innerWidth / 1.35, 400];
 
   // options
@@ -41,14 +42,15 @@ export class PolishStationStatsComponent implements OnInit {
     const pastMonthString = this.convertToParamString(pastMonth);
 
     this.statsService.getPetrolStationStats(pastMonthString, todayString, 1).subscribe(stats => {
-      this.multi = this.convertToSeriesObject(stats);
+      this.multi = this.convertToSeriesObject(stats.fuelPriceStats);
+      this.maxValues = stats.detailsStatsMap;
       this.isLoading = false;
     });
   }
 
   convertToParamString(date: Date): string {
     const monthText = date.getMonth() < 10 ? ('0' + date.getMonth()) : date.getMonth();
-    const dayText = date.getDay() < 10 ? ('0' + date.getDay()) : date.getDay();
+    const dayText = date.getDay() < 10 ? ('0' + (date.getDay() + 1)) : date.getDay();
     return `${date.getFullYear()}-${monthText}-${dayText}`;
   }
 
@@ -75,6 +77,10 @@ export class PolishStationStatsComponent implements OnInit {
   }
   onResize(event) {
     this.view = [event.target.innerWidth / 1.35, 400];
+  }
+
+  getFuelTypeKeys() {
+    return Object.keys(this.maxValues);
   }
 }
 

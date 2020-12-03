@@ -156,9 +156,24 @@ export interface PlaceDTO {
 export interface StatsDTO {
   day: string;
   opinionRank: PetrolStationDto[];
-  fuelTypePriceRank: {[key: string]: PetrolStationDto};
+  fuelTypePriceRank: {[key: string]: PetrolStationDto[]};
 }
 
 export interface FuelStats {
   [key: string]: FuelPriceStats[];
+}
+
+export interface DetailsStats {
+  priceMin: number;
+  dateMin: string;
+  priceMax: number;
+  dateMax: string;
+}
+export interface DetailsStatsDTO {
+  [key: string]: DetailsStats;
+}
+
+export interface FuelPriceStatsDTO {
+  fuelPriceStats: FuelStats;
+  detailsStatsMap: DetailsStatsDTO;
 }

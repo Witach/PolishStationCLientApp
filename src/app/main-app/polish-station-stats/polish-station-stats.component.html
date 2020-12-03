@@ -26,6 +26,23 @@
       >
       </ngx-charts-line-chart>
     </div>
+    <div class="max-values-container">
+      <div *ngFor="let fuel of getFuelTypeKeys()">
+        <span>{{fuel}}</span>
+        <table>
+          <tr>
+            <td>Max value: </td>
+            <td>{{maxValues[fuel].dateMax}}</td>
+            <td>{{maxValues[fuel].priceMax}} zł</td>
+          </tr>
+          <tr>
+            <td>Min value: </td>
+            <td>{{maxValues[fuel].dateMin}}</td>
+            <td>{{maxValues[fuel].priceMin}} zł</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
   <mat-spinner [class.hidden]="!isLoading"></mat-spinner>
 </div>

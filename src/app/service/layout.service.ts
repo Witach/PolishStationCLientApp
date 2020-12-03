@@ -10,7 +10,6 @@ export class LayoutService {
       Breakpoints.Small
     ]).subscribe(result => {
       if (result.matches) {
-        console.log("dupa");
       }
     });
   }

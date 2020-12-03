@@ -36,6 +36,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PolishStationStatsComponent } from './polish-station-stats/polish-station-stats.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { RanksComponent } from './ranks/ranks.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
     EditPetrolStaionComponent,
     UserProfileComponent,
     PolishStationStatsComponent,
+    RanksComponent,
   ],
   providers: [
     DualToggleEventService,

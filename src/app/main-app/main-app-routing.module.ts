@@ -10,6 +10,7 @@ import {CreateStationComponent} from './create-station/create-station.component'
 import {EditPetrolStaionComponent} from './edit-petrol-staion/edit-petrol-staion.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {PolishStationStatsComponent} from './polish-station-stats/polish-station-stats.component';
+import {RanksComponent} from './ranks/ranks.component';
 
 const routes: Routes = [
   { path: 'main', component: MainAppComponent, canActivate: [AuthGuard],
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'petrol-item/:id/edit', component: EditPetrolStaionComponent },
       { path: 'create', component: CreateStationComponent },
       { path: 'user-profile', component: UserProfileComponent },
+      { path: 'statistics', component: RanksComponent },
       { path: 'stats/:id', component: PolishStationStatsComponent },
     ] },
 ];

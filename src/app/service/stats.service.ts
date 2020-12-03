@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {FuelPriceStats, FuelStats, StatsDTO} from '../../api-models/api-models';
+import {FuelPriceStatsDTO, StatsDTO} from '../../api-models/api-models';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
@@ -15,11 +15,11 @@ export class StatsService {
     return this.http.get<StatsDTO>(`${environment.apiUrl}/statistics/rank`);
   }
 
-  getPetrolStationStats(dateFrom: string, dateTom: string, petrolStationId: number): Observable<FuelStats> {
+  getPetrolStationStats(dateFrom: string, dateTom: string, petrolStationId: number): Observable<FuelPriceStatsDTO> {
     const params = new HttpParams()
       .set('dateFrom', dateFrom)
       .set('dateTom', dateTom)
       .set('petrolStationId', '' + petrolStationId);
-    return this.http.get<FuelStats>(`${environment.apiUrl}/statistics/petrol-station`, {params});
+    return this.http.get<FuelPriceStatsDTO>(`${environment.apiUrl}/statistics/petrol-station`, {params});
   }
 }
