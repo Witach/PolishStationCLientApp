@@ -36,7 +36,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
               private petrolStationService: PetrolStationService,
               private breakpointObserver: BreakpointObserver,
               private storeService: StoreService) {
-    this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Medium, Breakpoints.XSmall]).subscribe(
+    this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Medium, Breakpoints.XSmall, Breakpoints.Large]).subscribe(
       res => this.onResolutionChange(res)
     );
   }
@@ -90,7 +90,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   private onResolutionChange(res: BreakpointState) {
-    this.isBigScreened = !res.breakpoints[Breakpoints.XSmall];
+    this.isBigScreened = !res.breakpoints[Breakpoints.XSmall] && !res.breakpoints[Breakpoints.Medium] && !res.breakpoints[Breakpoints.Small];
     this.switchToList();
   }
 

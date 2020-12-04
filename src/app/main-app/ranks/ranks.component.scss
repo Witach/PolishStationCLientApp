@@ -1,6 +1,5 @@
 @import "../../../common";
 
-
 .main-container {
   @include on-mobile-prop(width, 75%, 100%);
   margin: 20px auto 0 auto;
@@ -12,6 +11,7 @@
     width: 100% !important;
     display: block;
   }
+
   .mat-card .mat-card-header {
     @include on-mobile-prop(overflow-x, visible, scroll);
   }
@@ -52,24 +52,28 @@ h2 {
 
   .header-container {
     @include full-width;
+
     .mat-card-title {
       font-size: 1.5rem;
       margin-bottom: 5px;
     }
   }
 }
+
 .line-separator {
   @include full-width;
   height: 1px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 20px 20px 20px;
 }
+
 #map {
   width: 90%;
   margin: 20px auto;
   height: 500px;
 }
-.name-container table .small-text{
+
+.name-container table .small-text {
   @include small-text;
   opacity: 0.5;
 }
@@ -77,6 +81,7 @@ h2 {
 .main-container {
   margin-bottom: 20px;
 }
+
 .facility-container {
   @include flex-list(auto);
   margin-top: 20px;
@@ -97,21 +102,24 @@ h2 {
   margin-top: 20px;
   flex-wrap: wrap;
 }
+
 .fuel-price-container {
   @include flex-list(auto);
   flex-direction: column;
   margin-top: 20px;
+
   .input-section {
     @include flex-list(auto);
     @include on-mobile {
       flex-direction: column;
-      > *  {
+      > * {
         margin: 10px 0;
         width: 75%;
       }
     }
   }
 }
+
 .fuel-price-elem {
   display: inline-block;
   background: map-get($polish-station-theme-primary, 600);
@@ -125,6 +133,7 @@ h2 {
   @include default-box-shadow;
   margin: 15px 0 15px 20px;
 }
+
 .date-label {
   font-weight: 500;
   opacity: 0.5;
@@ -136,31 +145,38 @@ h2 {
 
 .rate-icon {
   vertical-align: bottom;
+
   mat-icon {
     font-size: 3rem;
     color: map-get($polish-station-theme-primary, 600);
   }
 }
+
 .red-grade {
   color: map-get($polish-station-theme-primary, 600);
 }
+
 .grade-to-click {
   cursor: pointer;
   font-size: 2rem;
   margin: 0 5px;
 }
+
 .comment-wrapper {
   @include flex-list(50%);
   align-items: center;
+
   > * {
     text-align: center;
   }
+
   margin-top: 20px;
   @include on-mobile {
     @include flex-list(100%);
     flex-direction: column;
   }
 }
+
 .input-section {
   margin-top: 20px;
 }
@@ -182,22 +198,25 @@ h2 {
   @include flex-list(auto);
   align-items: center;
 }
-::ng-deep {
-  .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  .mat-card {
-    @include on-mobile {
-      padding-left: 5px !important;
-      padding-right: 5px !important;
-    }
-  }
-}
+
+//::ng-deep {
+//  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+//    margin: 0 !important;
+//    padding-bottom: 0 !important;
+//  }
+//
+//  .mat-card {
+//    @include on-mobile {
+//      padding-left: 5px !important;
+//      padding-right: 5px !important;
+//    }
+//  }
+//}
 
 .grade-button {
   text-align: right;
 }
+
 .rate-sepparator {
   padding-left: 30px;
   padding-right: 15px;
@@ -206,8 +225,9 @@ h2 {
 .address-input-container {
   @include flex-list(auto);
   flex-direction: column;
+
   > * {
-    @include on-mobile-prop(width,50%, 100%);
+    @include on-mobile-prop(width, 50%, 100%);
     margin-top: 20px;
   }
 }
@@ -217,6 +237,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+
   > * {
     flex: 1 1 auto;
   }
@@ -228,6 +249,7 @@ mat-hint {
 
 .max-values-container {
   margin-top: 300px;
+
   span {
     width: 30%;
     display: block;
@@ -235,10 +257,12 @@ mat-hint {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     color: map-get($polish-station-theme-primary, 600);
   }
+
   > div {
     margin-bottom: 30px;
     flex: 1 1 50%;
   }
+
   td {
     padding: 10px 15px;
     font-size: 1.2rem;
@@ -246,16 +270,19 @@ mat-hint {
 }
 
 h5 {
-  margin: 10px 0 10px 20px;
+  margin: 20px 0 10px 20px !important;
 }
+
 .list-item {
   display: flex;
   margin-left: 20px;
+
   > span {
-    flex: 0 1 7%;
+    flex: 1 1 auto;
     display: block;
     margin: 5px 10px;
     width: 100px;
+
     &.item-number {
       color: map-get($polish-station-theme-primary, 600);
     }

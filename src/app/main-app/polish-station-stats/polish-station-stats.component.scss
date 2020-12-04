@@ -14,6 +14,9 @@
   }
   .mat-card .mat-card-header {
     @include on-mobile-prop(overflow-x, visible, scroll);
+    &.chart-container {
+      height: 410px;
+    }
   }
 }
 
@@ -181,18 +184,18 @@ h2 {
   @include flex-list(auto);
   align-items: center;
 }
-::ng-deep {
-  .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  .mat-card {
-    @include on-mobile {
-      padding-left: 5px !important;
-      padding-right: 5px !important;
-    }
-  }
-}
+//::ng-deep {
+//  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+//    margin: 0 !important;
+//    padding-bottom: 0 !important;
+//  }
+//  .mat-card {
+//    @include on-mobile {
+//      padding-left: 5px !important;
+//      padding-right: 5px !important;
+//    }
+//  }
+//}
 
 .grade-button {
   text-align: right;
@@ -226,7 +229,6 @@ mat-hint {
 }
 
 .max-values-container {
-  margin-top: 300px;
   span {
     width: 30%;
     display: block;

@@ -11,7 +11,9 @@ export class PolishStationStatsComponent implements OnInit {
 
   multi: any[];
   maxValues: DetailsStatsDTO = {};
-  view: any[] = [window.innerWidth / 1.35, 400];
+  scale = window.innerWidth > 1300 ? 1.4 : 1.05;
+  view: any[] = [window.innerWidth / this.scale, 400];
+
 
   // options
   legend: boolean = true;
@@ -76,7 +78,8 @@ export class PolishStationStatsComponent implements OnInit {
     }
   }
   onResize(event) {
-    this.view = [event.target.innerWidth / 1.35, 400];
+    this.scale = window.innerWidth > 1300 ? 1.4 : 1.05;
+    this.view = [event.target.innerWidth / this.scale, 400];
   }
 
   getFuelTypeKeys() {

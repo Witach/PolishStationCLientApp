@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="mat-card" [class.hidden]="isLoading">
     <div class="mat-card-header">
-      <form [formGroup]="newStation" (ngSubmit)="onSubmit()">
+      <form style="width: 100%" [formGroup]="newStation" (ngSubmit)="onSubmit()">
         <div class="mat-card-title">
           <div class="name-container">
             <h2>New gas station</h2>
@@ -9,7 +9,7 @@
         </div>
         <div class="info-container">
           <div class="header-container">
-            <h5 class="mat-card-title">Provide overal information</h5>
+            <h5 class="mat-card-title" style="width: 100%" >Provide overal information</h5>
             <div class="line-separator"></div>
             <div class="address-input-container">
               <mat-form-field appearance="outline">

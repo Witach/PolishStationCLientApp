@@ -2,7 +2,7 @@
 @include mat-core();
 @import 'material-custom';
 
-$mobile-width: 599px;
+$mobile-width: 1300px;
 $disable-color: rgba(0, 0, 0, 0.12);
 
 @mixin full-screen{
