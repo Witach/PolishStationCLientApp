@@ -78,6 +78,9 @@ h2 {
   @include on-mobile {
     @include flex-list(auto);
     flex-wrap: wrap;
+    > * {
+      flex: 1 1 115px;
+    }
   }
 }
 
