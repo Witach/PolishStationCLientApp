@@ -27,6 +27,16 @@ export class AdvancedFilterComponent implements OnInit {
   selectedDistance = 10;
   selectedSorting = 'distance';
 
+  petrolStationInfo = {
+    isWCFree: false,
+    isWC: false,
+    isRestaurant: false,
+    isCompressor: false,
+    isCarWash: false,
+    isHotDogs: false,
+    isSelfService: false,
+  };
+
   @Output('filterClicked')
   eventEmitter = new EventEmitter<any>();
 
@@ -58,10 +68,21 @@ export class AdvancedFilterComponent implements OnInit {
       paramsObj['maxDistance'] = this.selectedDistance;
     if (this.selectedSorting !== 'distance')
       paramsObj['sort'] = this.selectedSorting;
+    if(this.checkIfFacilityIsProvided()) {
+      paramsObj['facilities'] = this.getFacilityString();
+    }
     this.eventEmitter.emit(paramsObj);
   }
 
   switchToggle() {
     this.toggleValue = !this.toggleValue;
+  }
+
+  private checkIfFacilityIsProvided() {
+    return  Object.keys(this.petrolStationInfo).filter(key => this.petrolStationInfo[key]).length > 0;
+  }
+
+  private getFacilityString() {
+    return Object.keys(this.petrolStationInfo).filter(key => this.petrolStationInfo[key]).join(',');
   }
 }

@@ -1,13 +1,41 @@
 <span class="show-button" (click)="switchToggle()"><mat-icon>filter_alt</mat-icon></span>
 <div class="main-container" *ngIf="toggleValue" @myInsertRemoveTrigger>
   <div class="spec-fuel">
-    <h5 class="filter-label">Wybierz rodzaj paliwa:</h5>
+    <h5 class="filter-label">Choose fuel type:</h5>
     <mat-radio-group color="primary" (change)="this.onRadioButtonChange($event)">
       <mat-radio-button value="all">All</mat-radio-button>
       <mat-radio-button *ngFor="let type of fuelTypes" value="{{type}}">{{type | titlecase}}</mat-radio-button>
     </mat-radio-group>
   </div>
-  <h5 class="filter-label">Średnia ocen stacji</h5>
+  <div class="facilities-info">
+    <h5 class="filter-label">Choose facilities</h5>
+    <section class="spec-facilities">
+      <mat-checkbox  [(ngModel)]="petrolStationInfo.isCarWash" [ngModelOptions]="{standalone: true}"
+                    matTooltip="Dostępna myjnia samochodowa" class="facility-checkbox">
+        <mat-icon>local_car_wash</mat-icon>
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="petrolStationInfo.isCompressor" [ngModelOptions]="{standalone: true}"
+                    matTooltip="Dostępny kompresor do pompowania kół" class="facility-checkbox">Compressor
+      </mat-checkbox>
+      <mat-checkbox  [(ngModel)]="petrolStationInfo.isHotDogs" [ngModelOptions]="{standalone: true}"
+                    matTooltip="Na stacji można kupić hot dogi" class="facility-checkbox">Hot dogs
+      </mat-checkbox>
+      <mat-checkbox  [(ngModel)]="petrolStationInfo.isRestaurant" [ngModelOptions]="{standalone: true}"
+                    matTooltip="Na stacji jest dostępna restauracja" class="facility-checkbox">
+        <mat-icon>restaurant_menu</mat-icon>
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="petrolStationInfo.isWC" [ngModelOptions]="{standalone: true}"
+                    matTooltip="Na stacji dostępna jest toaleta" class="facility-checkbox">
+        <mat-icon>wc</mat-icon>
+      </mat-checkbox>
+      <mat-checkbox  [(ngModel)]="petrolStationInfo.isWCFree" [ngModelOptions]="{standalone: true}"
+                    matTooltip="Toaleta jest darmowa" class="facility-checkbox">
+        <mat-icon>wc</mat-icon>
+        Free
+      </mat-checkbox>
+    </section>
+  </div>
+  <h5 class="filter-label">Avg. opinion</h5>
   <div class="filters">
     <mat-slider [(value)]="selectedAvgOpinion"  thumbLabel [displayWith]="formatLabel" min="1" max="5" step="0.5" value="1" color="primary"></mat-slider>
   </div>

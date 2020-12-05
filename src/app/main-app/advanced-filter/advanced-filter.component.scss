@@ -38,3 +38,7 @@ mat-radio-group {
     margin: 5px 0;
   }
 }
+.spec-facilities {
+  @include flex-list(25%);
+  flex-wrap: wrap;
+}
