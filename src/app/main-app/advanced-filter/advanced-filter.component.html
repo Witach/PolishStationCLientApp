@@ -19,7 +19,6 @@
         <mat-option value="10">10km</mat-option>
         <mat-option value="20">20km</mat-option>
         <mat-option value="40">40km</mat-option>
-        <mat-option value="60">60km</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -30,8 +29,7 @@
         <mat-option value="distance" >Odległość</mat-option>
         <mat-option value="petrolStationStats.amountOfOpinion">Ilość ocen</mat-option>
         <mat-option value="petrolStationStats.avgOpinion">Średnia ocen</mat-option>
-        <mat-option value="popularity">Popularność</mat-option>
-        <mat-option value="price">Cena</mat-option>
+        <mat-option [disabled]="selectedFuelType === 'all'" value="price">Cena</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
