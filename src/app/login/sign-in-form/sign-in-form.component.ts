@@ -5,6 +5,7 @@ import {AuthService} from '../../service/auth.service';
 import {Router} from '@angular/router';
 import {SnackBarService} from '../../widget/snack-bar.service';
 import {first, tap} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -19,7 +20,8 @@ export class SignInFormComponent implements OnInit {
   constructor(private formsBuilder: FormBuilder,
               private authService: AuthService,
               private router: Router,
-              private snackBar: SnackBarService) {
+              private snackBar: SnackBarService,
+              private matSnackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -41,11 +43,15 @@ export class SignInFormComponent implements OnInit {
         .subscribe(
           () => {
             this.isLoading = false;
-            this.router.navigate(['/main', 'dashboard']);
+            this.router.navigate(['/main', 'petrol-list']);
           },
           err => {
             this.isLoading = false;
-            this.snackBar.openSnackBar(err);
+            if (err.status === 401) {
+              this.matSnackBar.open('Bad credentials', null, {duration: 1000, panelClass: ['polish-station-snack-bar']});
+            } else {
+              this.matSnackBar.open(err.message, null, {duration: 1000, panelClass: ['polish-station-snack-bar']})
+            }
           }
         );
     }

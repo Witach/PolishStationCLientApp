@@ -53,7 +53,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
           this.isLoading = false;
         }
       );
-    });
+    }, (err) => {alert(err.message);});
   }
 
   onFilterButtonClick(event: any): void {
