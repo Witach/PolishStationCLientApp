@@ -5,3 +5,12 @@
     min-height: 180px !important;
   }
 }
+.resemlbe-prompt {
+  color: gray;
+  font-size: 0.7rem;
+  cursor: pointer;
+  &:hover {
+    color: red;
+    text-decoration: underline;
+  }
+}

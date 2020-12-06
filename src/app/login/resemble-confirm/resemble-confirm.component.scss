@@ -1,0 +1,7 @@
+@import '../../../common';
+
+::ng-deep {
+  mat-card-content {
+    min-height: 180px !important;
+  }
+}

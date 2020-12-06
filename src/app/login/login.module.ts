@@ -10,6 +10,8 @@ import {SuccessfulSignUpComponent} from './successful-sign-up/successful-sign-up
 import {WidgetsModule} from '../widget/widgets.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { ResembleFormComponent } from './resemble-form/resemble-form.component';
+import { ResembleConfirmComponent } from './resemble-confirm/resemble-confirm.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         SignUpFormComponent,
         SignInFormComponent,
         ValidFormIconPipe,
-        SuccessfulSignUpComponent
+        SuccessfulSignUpComponent,
+        ResembleFormComponent,
+        ResembleConfirmComponent
     ],
     exports: [
         ValidFormIconPipe

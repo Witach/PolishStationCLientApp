@@ -50,7 +50,7 @@ export class SignInFormComponent implements OnInit {
             if (err.status === 401) {
               this.matSnackBar.open('Bad credentials', null, {duration: 1000, panelClass: ['polish-station-snack-bar']});
             } else {
-              this.matSnackBar.open(err.message, null, {duration: 1000, panelClass: ['polish-station-snack-bar']})
+              this.matSnackBar.open(err.message, null, {duration: 1000, panelClass: ['polish-station-snack-bar']});
             }
           }
         );

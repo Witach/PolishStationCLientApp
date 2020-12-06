@@ -71,4 +71,12 @@ export class AuthService {
   getUserStats(id: number) {
     return this.http.get<AppUserStatsDTO>(environment.apiUrl + '/app-user/' + id + '/stats');
   }
+
+  resemblePassword(email: string) {
+    return this.http.get<void>(environment.apiUrl + '/app-user/' + email + '/resemble');
+  }
+
+  updatePassword(email: string, jwt: string, user: AppUserPostDto) {
+    return this.http.patch(environment.apiUrl + '/app-user/' + email + '/update-password/' + jwt, user);
+  }
 }
