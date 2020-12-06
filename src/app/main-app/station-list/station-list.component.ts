@@ -11,6 +11,9 @@ export class StationListComponent implements OnInit {
   @Input()
   items: PetrolStationDto[];
 
+  @Input()
+  isOnLoginPage = false;
+
   @Output()
   listItemClickedEvent = new EventEmitter<PetrolStationDto>();
 

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-app',
@@ -6,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./login-app.component.scss']
 })
 export class LoginAppComponent implements OnInit {
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }

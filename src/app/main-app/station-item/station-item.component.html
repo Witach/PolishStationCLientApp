@@ -7,8 +7,8 @@
     {{item.localization.formattedAddress}}
   </p>
   <div class="list-item-actions">
-    <a [routerLink]="['/main','petrol-item', item.id]" class="link-button">Szczegóły</a>
-    <a class="link-button"> / </a>
+    <a *ngIf="!isOnLoginPage" [routerLink]="['/main','petrol-item', item.id]" class="link-button">Szczegóły</a>
+    <a *ngIf="!isOnLoginPage" class="link-button"> / </a>
     <a (click)="showOnMap.emit(item)" class="link-button">Pokaż na mapie</a>
   </div>
 </mat-card>

@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SwUpdate} from '@angular/service-worker';
+import {AuthService} from "./service/auth.service";
+import {first} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'polish-station-app';
 
 
-  constructor(updates: SwUpdate) {
+  constructor(updates: SwUpdate, private authService: AuthService, private router: Router) {
     updates.available.subscribe(x => {
       updates.activateUpdate().then(() => document.location.reload());
     });
@@ -18,6 +21,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // tslint:disable-next-line:only-arrow-functions
+    this.authService.currentUserSubject.pipe(
+      first()
+    ).subscribe(user => {
+      if (user) {
+        this.router.navigate(['/main', 'petrol-list']);
+      } else {
+        this.router.navigate(['/auth', 'landing-page']);
+      }
+    });
     self.addEventListener('fetch', function(event) {
       // @ts-ignore
       return event.respondWith(

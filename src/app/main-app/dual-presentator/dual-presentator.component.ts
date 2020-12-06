@@ -6,6 +6,7 @@ import {PetrolStationDto} from "../../../api-models/api-models";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {BreakpointState} from "@angular/cdk/layout/breakpoints-observer";
 import {StoreService} from "../../service/store.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dual-presentator',
@@ -32,16 +33,20 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
 
   isLoading = true;
 
+  isOnLoginPage: boolean = false;
+
   constructor(private dualToggleEvnetService: DualToggleEventService,
               private petrolStationService: PetrolStationService,
               private breakpointObserver: BreakpointObserver,
-              private storeService: StoreService) {
+              private storeService: StoreService,
+              private router: Router) {
     this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Medium, Breakpoints.XSmall, Breakpoints.Large]).subscribe(
       res => this.onResolutionChange(res)
     );
   }
 
   ngOnInit(): void {
+     this.isOnLoginPage = this.router.url.includes('auth');
     this.eventSub = this.dualToggleEvnetService.toggleEvent$.subscribe(
       (stateName) => this.onTogglePresenterState(stateName)
     );

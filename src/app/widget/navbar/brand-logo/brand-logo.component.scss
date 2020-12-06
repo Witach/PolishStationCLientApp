@@ -10,3 +10,8 @@
     font-size: 1.2rem;
   };
 }
+.pacifico.brand-logo {
+  @include on-mobile {
+    display: none;
+  }
+}

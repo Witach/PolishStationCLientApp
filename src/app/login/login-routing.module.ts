@@ -6,6 +6,8 @@ import {SignInFormComponent} from './sign-in-form/sign-in-form.component';
 import {SuccessfulSignUpComponent} from './successful-sign-up/successful-sign-up.component';
 import {ResembleConfirmComponent} from './resemble-confirm/resemble-confirm.component';
 import {ResembleFormComponent} from './resemble-form/resemble-form.component';
+import {DualPresentatorComponent} from '../main-app/dual-presentator/dual-presentator.component';
+import {LandingPageComponent} from './landing-page/landing-page.component';
 
 const routes: Routes = [
   { path: 'auth', component: LoginAppComponent,
@@ -15,7 +17,9 @@ const routes: Routes = [
       { path: 'register', component: SignUpFormComponent },
       { path: 'successful-registration', component: SuccessfulSignUpComponent },
       { path: 'resemble-form', component: ResembleConfirmComponent },
-      { path: 'resemble-reset/:jwt', component: ResembleFormComponent }
+      { path: 'resemble-reset/:jwt', component: ResembleFormComponent },
+      { path: 'search', component: DualPresentatorComponent },
+      { path: 'landing-page', component: LandingPageComponent }
     ] },
 
 ];

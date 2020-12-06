@@ -1,4 +1,4 @@
 <cdk-virtual-scroll-viewport [class.hidden]="isLoading" class="list-container" [itemSize]="items.length">
-  <app-station-item *cdkVirtualFor="let item of items" [item]="item" (showOnMap)="onListItemClick(item)"></app-station-item>
+  <app-station-item [isOnLoginPage]="isOnLoginPage" *cdkVirtualFor="let item of items" [item]="item" (showOnMap)="onListItemClick(item)"></app-station-item>
 </cdk-virtual-scroll-viewport>
 <mat-spinner [class.hidden]="!isLoading"></mat-spinner>

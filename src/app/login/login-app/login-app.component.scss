@@ -12,4 +12,16 @@ mat-form-field {
   @include full-screen-bacground-img("../../../assets/img/landing-page-img.jpg");
 }
 
-
+.fixed-toogle-button {
+  position: fixed;
+  right: 5px;
+  top: 60px;
+  z-index: 3;
+}
+::ng-deep {
+  mat-list-option.mat-list-item-disabled {
+    * {
+      color: gray !important;
+    }
+  }
+}

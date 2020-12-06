@@ -12,6 +12,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { ResembleFormComponent } from './resemble-form/resemble-form.component';
 import { ResembleConfirmComponent } from './resemble-confirm/resemble-confirm.component';
+import { LoginTogglePresenterButtonComponent } from './login-toggle-presenter-button/login-toggle-presenter-button.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 @NgModule({
@@ -23,17 +26,20 @@ import { ResembleConfirmComponent } from './resemble-confirm/resemble-confirm.co
         ValidFormIconPipe,
         SuccessfulSignUpComponent,
         ResembleFormComponent,
-        ResembleConfirmComponent
+        ResembleConfirmComponent,
+        LoginTogglePresenterButtonComponent,
+        LandingPageComponent
     ],
     exports: [
         ValidFormIconPipe
     ],
-    imports: [
-        SharedModule,
-        LoginRoutingModule,
-        WidgetsModule,
-        MatSidenavModule,
-        MatProgressSpinnerModule,
-    ]
+  imports: [
+    SharedModule,
+    LoginRoutingModule,
+    WidgetsModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatButtonToggleModule,
+  ]
 })
 export class LoginModule { }

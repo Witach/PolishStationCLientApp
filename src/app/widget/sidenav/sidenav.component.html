@@ -4,7 +4,7 @@
                      [value]="item.href"
                      [disabled]="item.isDisabled"
                      (click)="onMenuItemClick(item.href, item.procedure)">
-      <span class="menu-item" [routerLink]="item.href">
+      <span class="menu-item">
         <mat-icon>{{item.iconName}}</mat-icon>
         <span>{{item.title}}</span>
       </span>

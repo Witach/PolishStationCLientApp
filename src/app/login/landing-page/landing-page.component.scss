@@ -1,0 +1,21 @@
+@import "../../../common";
+.container {
+  text-align: center;
+  margin-top: 20vh;
+  .main-title {
+    margin-bottom: 20px;
+    display: inline-block;
+    font-size: 2rem;
+    color: white;
+  }
+  .submit-button {
+    font-size: 1.6rem;
+    padding: 15px;
+  }
+  .main-icon {
+    margin-bottom: 20px;
+    font-size: 6rem;
+    margin-right: 50px;
+    color: #f44336;
+  }
+}
