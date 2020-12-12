@@ -2,10 +2,10 @@
 <div class="swipe-container-window">
   <div class="swipe-container" [ngStyle]="duelPresenterStyle">
     <div class="item-swipe" id="list-item">
-      <app-station-list [isOnLoginPage]="isOnLoginPage" [isLoading]="isLoading" (listItemClickedEvent)="onListItemClick($event)" [items]="items || []"></app-station-list>
+      <app-station-list [isOnLoginPage]="isOnLoginPage" [isLoading]="isLoading" (listItemClickedEvent)="onListItemClick($event)" [items]="items?.petrolStations || []"></app-station-list>
     </div>
     <div class="item-swipe" id="map-item">
-      <app-map-list-presentator [focusedPair]="focusedItemId" [items]="items || []"></app-map-list-presentator>
+      <app-map-list-presentator [focusedPair]="focusedItemId" [items]="items || {petrolStations: []}"></app-map-list-presentator>
     </div>
   </div>
 </div>

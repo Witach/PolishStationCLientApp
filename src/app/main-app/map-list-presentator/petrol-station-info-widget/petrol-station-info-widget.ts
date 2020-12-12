@@ -1,6 +1,5 @@
 import {LastFuelPriceDTO, PetrolStationDto} from '../../../../api-models/api-models';
-import {PetrolStationMarker} from "./petrol-station-marker";
-import {map} from "rxjs/operators";
+import {PetrolStationMarker} from './petrol-station-marker';
 
 export class PetrolStationInfoWidget {
   name: string;
@@ -37,10 +36,11 @@ export class PetrolStationInfoWidget {
   }
 }
 
-export function markerWindowPair(petrolStation: PetrolStationDto, gmap: google.maps.Map): MarkerWindowInfoPair {
+export function markerWindowPair(petrolStation: PetrolStationDto,
+                                 gmap: google.maps.Map, fuelPrice?: LastFuelPriceDTO): MarkerWindowInfoPair {
   return {
     id: petrolStation.id,
-    marker: PetrolStationMarker.instanceOfMarkerFromPetrolStationDTO(petrolStation, gmap),
+    marker: PetrolStationMarker.instanceOfMarkerFromPetrolStationDTO(petrolStation, gmap, fuelPrice),
     windowInfo: PetrolStationInfoWidget.instanceOfWindowInfoFromPetrolStation(petrolStation, gmap),
   };
 }

@@ -24,7 +24,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
     marginLeft: '0'
   };
 
-  items: PetrolStationDto[];
+  items: {petrolStations: PetrolStationDto[], fuelType?: string };
 
   eventSub: Subscription;
 
@@ -54,7 +54,9 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
       this.storeService.userPosition = position;
       this.petrolStationService.getPetrolStations({lat: position.coords.latitude, long: position.coords.longitude, maxDistance: 10}).subscribe(
         (stations) => {
-          this.items = stations;
+          this.items = {
+            petrolStations: stations,
+          };
           this.isLoading = false;
         }
       );
@@ -68,7 +70,10 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
     this.petrolStationService.getPetrolStations(params).subscribe(
       (stations) => {
         this.isLoading = false;
-        this.items = stations;
+        this.items = {
+          petrolStations: stations,
+          fuelType: event.fuelType
+        };
       }
     );
   }

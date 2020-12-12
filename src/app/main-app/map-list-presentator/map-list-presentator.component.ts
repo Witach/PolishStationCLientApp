@@ -46,15 +46,21 @@ export class MapListPresentatorComponent implements OnInit, AfterViewInit {
 
 
   @Input('items')
-  set petrolStations(petrolStations: PetrolStationDto[]) {
-    this.petrolStationsProp = petrolStations;
+  set petrolStations(petrolStationsAndFuel: {petrolStations: PetrolStationDto[], fuelType?: string }) {
+    this.petrolStationsProp = petrolStationsAndFuel.petrolStations;
     this.petrolStationsSub = this.isInitialized.subscribe(isInitial => {
       if (isInitial) {
-        this.markerPairs.forEach( marker => marker.marker.setMap(null));
-        this.markerPairs = this.petrolStationsProp.map(
-          petrolStation => markerWindowPair(petrolStation, this.gmap)
+        this.markerPairs?.forEach( marker => marker.marker.setMap(null));
+        this.markerPairs = this.petrolStationsProp?.map(
+          petrolStation => {
+            if (petrolStationsAndFuel.fuelType) {
+              return markerWindowPair(petrolStation, this.gmap,
+                petrolStation.fuelPriceDTO.find(fuelPrice => fuelPrice.fuelType === petrolStationsAndFuel.fuelType));
+            }
+            return markerWindowPair(petrolStation, this.gmap);
+          }
         );
-        this.markerPairs.forEach(pair => pair.marker.addListener('click', () => this.toggleBounce(pair)));
+        this.markerPairs?.forEach(pair => pair.marker.addListener('click', () => this.toggleBounce(pair)));
         this.petrolStationsSub.unsubscribe();
       }
     });
