@@ -39,7 +39,7 @@
             <section class="fuel-price-container">
               <div class="fuel-price-elem-container" *ngFor="let fuelPrice of station?.fuelPriceDTO || []">
                 <span class="date-label">{{stringifyDateHumanReadable(fuelPrice.date)}}</span>
-                <div  class="fuel-price-elem">{{fuelPrice.fuelType}} {{fuelPrice.price}}zł</div>
+                <div  class="fuel-price-elem">{{fuelPrice.fuelType}} | {{fuelPrice.price | priceFormatter}}</div>
               </div>
               <div class="input-section">
                 <mat-form-field appearance="outline">
