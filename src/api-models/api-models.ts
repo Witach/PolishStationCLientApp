@@ -177,3 +177,7 @@ export interface FuelPriceStatsDTO {
   fuelPriceStats: FuelStats;
   detailsStatsMap: DetailsStatsDTO;
 }
+
+export interface ResMessage {
+  message: string;
+}
