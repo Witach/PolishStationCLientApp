@@ -1,0 +1,17 @@
+<div class="main-container">
+  <div class="mat-card" [class.hidden]="isLoading">
+    <div class="mat-card-header">
+      <ng-container *ngIf="petrolStations?.length > 0">
+        <h2>Your favorite stations</h2>
+        <ng-container *ngFor="let petrolStation of petrolStations">
+          <div class="favorite-item">
+            <app-station-item [item]="petrolStation" [isOnFavoritePage]="true"></app-station-item>
+            <app-loved-station [petrolStation]="petrolStation"></app-loved-station>
+          </div>
+        </ng-container>
+      </ng-container>
+      <h2 *ngIf="petrolStations?.length <= 0">You have no favorite station</h2>
+    </div>
+  </div>
+  <mat-spinner [class.hidden]="!isLoading"></mat-spinner>
+</div>

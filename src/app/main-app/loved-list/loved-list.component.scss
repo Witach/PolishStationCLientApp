@@ -1,0 +1,30 @@
+@import "../../../common";
+h2 {
+  color: #e53935;
+  font-size: 40px;
+}
+.favorite-item {
+  @include flex-list(auto);
+  align-items: center;
+  app-station-item {
+    flex: 1 1 90%;
+    @include on-mobile {
+      flex: 1 1 80%;
+    }
+  }
+  mat-icon {
+    flex: 1 1 10%;
+    color:  red;
+    @include on-mobile {
+      flex: 1 1 20%;
+    }
+  }
+  @include on-mobile-prop(width, 60%, 100%)
+}
+.mat-card-header {
+  flex-direction: column;
+}
+.mat-card {
+  @include on-mobile-prop(width, 60%, 100%);
+  margin: 20px auto 20px auto;
+}

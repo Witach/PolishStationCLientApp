@@ -1,14 +1,14 @@
 <mat-card class="small-card">
   <div class="card-info-container">
     <h2>{{item.name}}</h2>
-    <app-fuel-prices [items]="item"></app-fuel-prices>
+    <app-fuel-prices *ngIf="!isOnFavoritePage" [items]="item"></app-fuel-prices>
   </div>
   <p class="side-info">
     {{item.localization.formattedAddress}}
   </p>
   <div class="list-item-actions">
     <a *ngIf="!isOnLoginPage" [routerLink]="['/main','petrol-item', item.id]" class="link-button">Szczegóły</a>
-    <a *ngIf="!isOnLoginPage" class="link-button"> / </a>
-    <a (click)="showOnMap.emit(item)" class="link-button">Pokaż na mapie</a>
+    <a *ngIf="!isOnLoginPage && !isOnFavoritePage" class="link-button"> / </a>
+    <a *ngIf="!isOnFavoritePage" (click)="showOnMap.emit(item)" class="link-button">Pokaż na mapie</a>
   </div>
 </mat-card>

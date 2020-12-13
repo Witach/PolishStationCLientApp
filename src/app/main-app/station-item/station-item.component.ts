@@ -14,6 +14,9 @@ export class StationItemComponent implements OnInit {
   @Input()
   isOnLoginPage = false;
 
+  @Input()
+  isOnFavoritePage = false;
+
   @Output()
   showOnMap = new EventEmitter<PetrolStationDto>();
 

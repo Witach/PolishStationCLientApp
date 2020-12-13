@@ -11,6 +11,7 @@ import {EditPetrolStaionComponent} from './edit-petrol-staion/edit-petrol-staion
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {PolishStationStatsComponent} from './polish-station-stats/polish-station-stats.component';
 import {RanksComponent} from './ranks/ranks.component';
+import {LovedListComponent} from './loved-list/loved-list.component';
 
 const routes: Routes = [
   { path: 'main', component: MainAppComponent, canActivate: [AuthGuard],
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'create', component: CreateStationComponent },
       { path: 'user-profile', component: UserProfileComponent },
       { path: 'statistics', component: RanksComponent },
+      { path: 'favorite', component: LovedListComponent },
       { path: 'stats/:id', component: PolishStationStatsComponent },
     ] },
 ];
