@@ -1,0 +1,4 @@
+<ng-container *ngIf="petrolStation">
+  <mat-icon *ngIf="petrolStation.isLovedByUser" (click)="endLike()">star</mat-icon>
+  <mat-icon *ngIf="!petrolStation.isLovedByUser" (click)="startToLike()">star_outline</mat-icon>
+</ng-container>

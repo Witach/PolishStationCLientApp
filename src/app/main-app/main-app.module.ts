@@ -37,6 +37,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PolishStationStatsComponent } from './polish-station-stats/polish-station-stats.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import { RanksComponent } from './ranks/ranks.component';
+import { LovedStationComponent } from './loved-station/loved-station.component';
+import { LovedListComponent } from './loved-list/loved-list.component';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { RanksComponent } from './ranks/ranks.component';
     UserProfileComponent,
     PolishStationStatsComponent,
     RanksComponent,
+    LovedStationComponent,
+    LovedListComponent,
   ],
   providers: [
     DualToggleEventService,

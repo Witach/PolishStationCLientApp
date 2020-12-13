@@ -3,7 +3,16 @@
     <div class="mat-card-header">
       <div class="mat-card-title">
          <div class="name-container">
-           <h2>{{station?.name || ''}}<ng-container><div class="tooltip-container" matTooltip="You're {{pointsPreviligies.verified - userPoints}} points short" [matTooltipDisabled]="!(userPoints < pointsPreviligies.verified)"><button [disabled]="userPoints < pointsPreviligies.verified"  [routerLink]="['/main', 'petrol-item', this?.station?.id, 'edit']" mat-mini-fab class="edit-button" color="primary"><mat-icon>edit</mat-icon></button> </div></ng-container></h2>
+           <h2>{{station?.name || ''}}
+             <ng-container>
+               <div class="tooltip-container" matTooltip="You're {{pointsPreviligies.verified - userPoints}} points short" [matTooltipDisabled]="!(userPoints < pointsPreviligies.verified)">
+                 <button [disabled]="userPoints < pointsPreviligies.verified"  [routerLink]="['/main', 'petrol-item', this?.station?.id, 'edit']" mat-mini-fab class="edit-button" color="primary">
+                   <mat-icon>edit</mat-icon>
+                 </button>
+               </div>
+               <app-loved-station [petrolStation]="station"></app-loved-station>
+             </ng-container>
+           </h2>
            <table>
              <tr>
                <td class="small-text">Lat: </td>

@@ -239,7 +239,7 @@ export class PetrolStationDetailsComponent implements OnInit, AfterViewInit {
       };
       this.petrolStationService.addFuelPrice(fuelPriceDTO).subscribe(
         (res ) => {
-          this.matSnackBar.open(res.message, null, {duration: 1000, panelClass: ['polish-station-snack-bar']} )
+          this.matSnackBar.open(res.message, null, {duration: 1000, panelClass: ['polish-station-snack-bar']} );
           this.initComponent();
         }
       );

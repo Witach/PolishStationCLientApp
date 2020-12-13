@@ -7,6 +7,7 @@ export interface PetrolStationDto {
   fuelPriceDTO: LastFuelPriceDTO[];
   distance: number;
   fuelTypes: string[];
+  isLovedByUser: boolean;
 }
 
 export interface PetrolStationStats {
@@ -180,4 +181,8 @@ export interface FuelPriceStatsDTO {
 
 export interface ResMessage {
   message: string;
+}
+
+export interface LovedPetrolStationDTO {
+  petrolStationId: number;
 }
