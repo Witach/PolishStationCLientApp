@@ -79,6 +79,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   onListItemClick(listItem: PetrolStationDto) {
+    debugger
     this.focusedItemId = listItem.id;
     this.switchToMapWithResolution();
   }
@@ -92,6 +93,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   onTogglePresenterState(stateName: string) {
+    debugger
     if (stateName === 'list' && !this.isBigScreened) {
       this.duelPresenterStyle.marginLeft = '0';
     } else if (stateName === 'map' && !this.isBigScreened) {
@@ -117,10 +119,10 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   switchToMap() {
-    document.getElementById('mat-button-toggle-2-button')?.click();
+    document.getElementById('toggle-button-map')?.click();
   }
 
   switchToList() {
-    document.getElementById('mat-button-toggle-1-button')?.click();
+    document.getElementById('toggle-button-list')?.click();
   }
 }

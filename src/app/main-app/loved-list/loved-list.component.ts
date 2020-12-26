@@ -20,7 +20,6 @@ export class LovedListComponent implements OnInit {
       this.lovedService.getLikedPetrolStations(user.email).subscribe(
         _ => {
           this.isLoading = false;
-          debugger;
           this.petrolStations = _;
         }
       );
