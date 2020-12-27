@@ -55,8 +55,8 @@
       <mat-label>Sortowanie</mat-label>
       <mat-select disableRipple [(value)]="selectedSorting">
         <mat-option value="distance" >Odległość</mat-option>
-        <mat-option value="petrolStationStats.amountOfOpinion">Ilość ocen</mat-option>
-        <mat-option value="petrolStationStats.avgOpinion">Średnia ocen</mat-option>
+        <mat-option value="petrolStationStats.amountOfOpinion,desc">Ilość ocen</mat-option>
+        <mat-option value="petrolStationStats.avgOpinion,desc">Średnia ocen</mat-option>
         <mat-option [disabled]="selectedFuelType === 'all'" value="price">Cena</mat-option>
       </mat-select>
     </mat-form-field>

@@ -26,7 +26,6 @@ export class StationListComponent implements OnInit {
   }
 
   onListItemClick(petrolStation: PetrolStationDto) {
-    debugger
     this.listItemClickedEvent.emit(petrolStation);
   }
 
