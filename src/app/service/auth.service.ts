@@ -3,8 +3,9 @@ import {AppUserDTO, AppUserPostDto, AppUserStatsDTO, AUthResponse} from '../../a
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {first, map, switchMap, tap} from 'rxjs/operators';
+import {first, map, mergeMapTo, switchMap, tap} from 'rxjs/operators';
 import {StorageService} from './storage.service';
+import {AngularFireMessaging} from "@angular/fire/messaging";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
   trueUser: AppUserDTO;
 
 
-  constructor(private http: HttpClient, private storageService: StorageService) {
+  constructor(private http: HttpClient, private storageService: StorageService, private agfMessaging: AngularFireMessaging) {
     this.currentUserSubject = new BehaviorSubject<AppUserDTO>(this.storageService.loadUserFromStorage());
     this.currentUserObservable = this.currentUserSubject.asObservable();
   }
@@ -44,7 +45,18 @@ export class AuthService {
           this.storageService.saveUserInStorage(user);
           this.currentUserSubject.next(user);
           return user;
-        }));
+        }),
+        tap(user => {
+          this.agfMessaging.requestPermission
+            .pipe(mergeMapTo(this.agfMessaging.tokenChanges))
+            .subscribe(
+              (token) => {
+                  this.http.post<{fireToken: string}>(`${environment.apiUrl}/app-user/${user.email}/fire-token`, {fireToken: token}).subscribe();
+              },
+              (error) => { console.error(error); },
+            );
+        })
+      );
   }
 
   loadUserData(appUserRequest: AppUserDTO) {

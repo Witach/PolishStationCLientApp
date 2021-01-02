@@ -1,12 +1,13 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {DualToggleEventService} from "../dual-presentator-toggle/dual-toggle-event-service";
+import {DualToggleEventService} from '../dual-presentator-toggle/dual-toggle-event-service';
 import {Subscription} from "rxjs";
-import {PetrolStationService} from "../../service/petrol-station.service";
+import {PetrolStationService} from '../../service/petrol-station.service';
 import {PetrolStationDto} from "../../../api-models/api-models";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {BreakpointState} from "@angular/cdk/layout/breakpoints-observer";
 import {StoreService} from "../../service/store.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-dual-presentator',
@@ -39,6 +40,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
               private petrolStationService: PetrolStationService,
               private breakpointObserver: BreakpointObserver,
               private storeService: StoreService,
+              private authService: AuthService,
               private router: Router) {
     this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.Medium, Breakpoints.XSmall, Breakpoints.Large]).subscribe(
       res => this.onResolutionChange(res)
@@ -46,7 +48,7 @@ export class DualPresentatorComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngOnInit(): void {
-     this.isOnLoginPage = this.router.url.includes('auth');
+    this.isOnLoginPage = this.router.url.includes('auth');
     this.eventSub = this.dualToggleEvnetService.toggleEvent$.subscribe(
       (stateName) => this.onTogglePresenterState(stateName)
     );
